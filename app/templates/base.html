@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Gestión de Estudios{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        input:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 30px #1f2937 inset !important;
+            -webkit-text-fill-color: white !important;
+        }
+    </style>
+</head>
+<body class="bg-gray-950 text-gray-200 font-sans min-h-screen flex flex-col">
+
+    <nav class="bg-gray-900 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <span class="text-white font-bold text-xl tracking-wider">Estudios<span class="text-indigo-500">.io</span></span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    {% if current_user.is_authenticated %}
+                        <span class="text-gray-300 text-sm">Hola, <span class="text-white font-medium">{{ current_user.username }}</span></span>
+                        <a href="{{ url_for('auth.logout') }}" class="text-gray-400 hover:text-white text-sm transition-colors">Cerrar Sesión</a>
+                    {% else %}
+                        <a href="{{ url_for('auth.login') }}" class="text-gray-400 hover:text-white text-sm transition-colors">Iniciar Sesión</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow flex items-center justify-center p-6">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+</body>
+</html>

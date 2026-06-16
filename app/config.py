@@ -1,0 +1,6 @@
+class Config:
+    SECRET_KEY = 'mi-clave-super-secreta'
+    SQLALCHEMY_DATABASE_URI = "sqlite:///database.db"
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    
