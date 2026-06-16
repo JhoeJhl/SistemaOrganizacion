@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Crear Cuenta - Estudios.io{% endblock %}
+
+{% block content %}
+<div class="flex-grow flex items-center justify-center p-6">
+    <div class="w-full max-w-md bg-gray-900 rounded-2xl shadow-2xl border border-gray-800 overflow-hidden">
+        <div class="p-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-white tracking-tight">Crea tu cuenta</h2>
+                <p class="text-gray-400 mt-2 text-sm">Comienza a organizar tus estudios hoy mismo.</p>
+            </div>
+
+            <form method="POST" action="{{ url_for('auth.register') }}" class="space-y-5">
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-400 mb-1.5">Nombre de Usuario</label>
+                    <input type="text" id="username" name="username" required
+                        class="w-full px-4 py-3 bg-gray-950 border border-gray-800 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all">
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-400 mb-1.5">Contraseña</label>
+                    <input type="password" id="password" name="password" required
+                        class="w-full px-4 py-3 bg-gray-950 border border-gray-800 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all">
+                </div>
+
+                <div>
+                    <label for="confirm_password" class="block text-sm font-medium text-gray-400 mb-1.5">Confirmar Contraseña</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required
+                        class="w-full px-4 py-3 bg-gray-950 border border-gray-800 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all">
+                </div>
+
+                <button type="submit"
+                    class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3.5 px-4 rounded-xl transition-all duration-200 shadow-lg shadow-indigo-500/25 active:scale-[0.98]">
+                    Crear Cuenta
+                </button>
+            </form>
+
+            <div class="mt-8 pt-6 border-t border-gray-800 text-center">
+                <p class="text-sm text-gray-500">¿Ya tienes una cuenta? 
+                    <a href="{{ url_for('auth.login') }}" class="text-indigo-400 hover:text-indigo-300 font-medium transition-colors">Inicia sesión aquí</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
