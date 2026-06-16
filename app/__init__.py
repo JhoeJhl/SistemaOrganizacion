@@ -21,10 +21,12 @@ def create_app():
     # 1. Importación del blueprint (Para cada módulo)
     from app.api.auth import auth_bp
     from app.api.main import main_bp
+    from app.api.study import study_bp
 
     # 2. Registrar el blueprint (Para cada módulo)
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(main_bp, url_prefix='/')
+    app.register_blueprint(study_bp, url_prefix='/study')
 
     login_manager.login_view = 'auth.login'
     login_manager.login_message_category = 'info'

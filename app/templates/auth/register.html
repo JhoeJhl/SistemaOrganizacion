@@ -3,45 +3,69 @@
 {% block title %}Crear Cuenta - Estudios.io{% endblock %}
 
 {% block content %}
-<div class="flex-grow flex items-center justify-center p-6">
-    <div class="w-full max-w-md bg-gray-900 rounded-2xl shadow-2xl border border-gray-800 overflow-hidden">
-        <div class="p-8">
-            <div class="text-center mb-8">
-                <h2 class="text-3xl font-bold text-white tracking-tight">Crea tu cuenta</h2>
-                <p class="text-gray-400 mt-2 text-sm">Comienza a organizar tus estudios hoy mismo.</p>
+<div class="min-h-[calc(100vh-80px)] flex items-center justify-center p-4 relative overflow-hidden">
+    <!-- Background dinámico -->
+    <div class="absolute inset-0 bg-gradient-to-br from-purple-950 via-gray-950 to-indigo-950"></div>
+    
+    <!-- Elementos decorativos flotantes -->
+    <div class="absolute top-10 right-20 w-80 h-80 bg-purple-600/20 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-20 left-10 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+    
+    <!-- Card Principal -->
+    <div class="w-full max-w-lg relative z-10">
+        <!-- Logo y marca -->
+        <div class="text-center mb-8">
+            <div class="inline-block relative">
+                <div class="absolute inset-0 bg-gradient-to-r from-purple-500 to-indigo-500 blur-2xl opacity-50"></div>
+                <div class="relative bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-xl border border-white/10 rounded-3xl p-6 inline-block shadow-2xl">
+                    <div class="flex items-center gap-3">
+                        <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-purple-500/25">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-2xl font-bold text-white tracking-tight">Estudios<span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">.io</span></h1>
+                            <p class="text-xs text-gray-400">Organiza tu éxito académico</p>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
 
-            <form method="POST" action="{{ url_for('auth.register') }}" class="space-y-5">
-                <div>
-                    <label for="username" class="block text-sm font-medium text-gray-400 mb-1.5">Nombre de Usuario</label>
-                    <input type="text" id="username" name="username" required
-                        class="w-full px-4 py-3 bg-gray-950 border border-gray-800 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all">
+        <!-- Formulario -->
+        <div class="bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl overflow-hidden">
+            <div class="p-8 md:p-10">
+                <!-- Encabezado -->
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-white tracking-tight">Únete a la comunidad 🚀</h2>
+                    <p class="text-gray-400 mt-2">Comienza tu viaje hacia el éxito académico</p>
                 </div>
 
-                <div>
-                    <label for="password" class="block text-sm font-medium text-gray-400 mb-1.5">Contraseña</label>
-                    <input type="password" id="password" name="password" required
-                        class="w-full px-4 py-3 bg-gray-950 border border-gray-800 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all">
+                <!-- Form -->
+                {% include 'components/forms/register_form.html' %}
+
+                <!-- Enlace Login -->
+                <div class="mt-8 pt-6 border-t border-gray-700/50 text-center">
+                    <p class="text-gray-400">
+                        ¿Ya tienes cuenta? 
+                        <button onclick="openModal('login')" class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400 font-bold hover:from-purple-300 hover:to-indigo-300 transition-all duration-200">
+                            Inicia sesión aquí →
+                        </button>
+                    </p>
                 </div>
-
-                <div>
-                    <label for="confirm_password" class="block text-sm font-medium text-gray-400 mb-1.5">Confirmar Contraseña</label>
-                    <input type="password" id="confirm_password" name="confirm_password" required
-                        class="w-full px-4 py-3 bg-gray-950 border border-gray-800 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all">
-                </div>
-
-                <button type="submit"
-                    class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3.5 px-4 rounded-xl transition-all duration-200 shadow-lg shadow-indigo-500/25 active:scale-[0.98]">
-                    Crear Cuenta
-                </button>
-            </form>
-
-            <div class="mt-8 pt-6 border-t border-gray-800 text-center">
-                <p class="text-sm text-gray-500">¿Ya tienes una cuenta? 
-                    <a href="{{ url_for('auth.login') }}" class="text-indigo-400 hover:text-indigo-300 font-medium transition-colors">Inicia sesión aquí</a>
-                </p>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    @keyframes float {
+        0%, 100% { transform: translateY(0px) scale(1); opacity: 0.3; }
+        50% { transform: translateY(-20px) scale(1.5); opacity: 0.8; }
+    }
+    .animate-float {
+        animation: float 4s ease-in-out infinite;
+    }
+</style>
 {% endblock %}

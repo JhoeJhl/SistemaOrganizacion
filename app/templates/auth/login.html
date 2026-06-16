@@ -3,42 +3,95 @@
 {% block title %}Iniciar Sesión - Estudios.io{% endblock %}
 
 {% block content %}
-<div class="flex-grow flex items-center justify-center p-6">
-    <div class="w-full max-w-md bg-gray-900 rounded-2xl shadow-2xl border border-gray-800 overflow-hidden">
-        <div class="p-8">
-            <div class="text-center mb-8">
-                <h2 class="text-3xl font-bold text-white tracking-tight">Bienvenido de nuevo</h2>
-                <p class="text-gray-400 mt-2 text-sm">Ingresa tus credenciales para continuar.</p>
-            </div>
-
-            <form method="POST" action="{{ url_for('auth.login') }}" class="space-y-6">
-                <div>
-                    <label for="username" class="block text-sm font-medium text-gray-400 mb-1.5">Nombre de Usuario</label>
-                    <input type="text" id="username" name="username" required
-                        class="w-full px-4 py-3 bg-gray-950 border border-gray-800 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all">
-                </div>
-
-                <div>
-                    <div class="flex items-center justify-between mb-1.5">
-                        <label for="password" class="block text-sm font-medium text-gray-400">Contraseña</label>
-                        <a href="#" class="text-xs text-indigo-400 hover:text-indigo-300">¿Olvidaste tu contraseña?</a>
+<div class="min-h-[calc(100vh-80px)] flex items-center justify-center p-4 relative overflow-hidden">
+    <!-- Background dinámico -->
+    <div class="absolute inset-0 bg-gradient-to-br from-indigo-950 via-gray-950 to-purple-950"></div>
+    
+    <!-- Elementos decorativos flotantes -->
+    <div class="absolute top-20 left-10 w-72 h-72 bg-indigo-600/20 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-20 right-10 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+    
+    <!-- Card Principal -->
+    <div class="w-full max-w-lg relative z-10">
+        <!-- Logo y marca -->
+        <div class="text-center mb-8">
+            <div class="inline-block relative">
+                <div class="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 blur-2xl opacity-50"></div>
+                <div class="relative bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-xl border border-white/10 rounded-3xl p-6 inline-block shadow-2xl">
+                    <div class="flex items-center gap-3">
+                        <div class="w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-500/25">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-2xl font-bold text-white tracking-tight">Estudios<span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">.io</span></h1>
+                            <p class="text-xs text-gray-400">Organiza tu éxito académico</p>
+                        </div>
                     </div>
-                    <input type="password" id="password" name="password" required
-                        class="w-full px-4 py-3 bg-gray-950 border border-gray-800 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all">
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulario -->
+        <div class="bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl overflow-hidden">
+            <div class="p-8 md:p-10">
+                <!-- Encabezado -->
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-white tracking-tight">¡Bienvenido de vuelta! 👋</h2>
+                    <p class="text-gray-400 mt-2">Inicia sesión para continuar tu camino al éxito</p>
                 </div>
 
-                <button type="submit"
-                    class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3.5 px-4 rounded-xl transition-all duration-200 shadow-lg shadow-indigo-500/25 active:scale-[0.98]">
-                    Entrar al Sistema
-                </button>
-            </form>
+                <!-- Form -->
+                {% include 'components/forms/login_form.html' %}
 
-            <div class="mt-8 pt-6 border-t border-gray-800 text-center">
-                <p class="text-sm text-gray-500">¿No tienes una cuenta? 
-                    <a href="{{ url_for('auth.register') }}" class="text-indigo-400 hover:text-indigo-300 font-medium transition-colors">Regístrate gratis</a>
-                </p>
+                <!-- Separador -->
+                <div class="relative my-8">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-700/50"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span class="px-4 bg-gradient-to-br from-gray-900/90 to-gray-800/90 text-gray-500">O continúa con</span>
+                    </div>
+                </div>
+
+                <!-- Redes sociales -->
+                <div class="grid grid-cols-2 gap-3">
+                    <button class="flex items-center justify-center gap-2 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl transition-all duration-300 group">
+                        <svg class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.748L12.545,10.239z"/>
+                        </svg>
+                        <span class="text-sm text-gray-400 group-hover:text-white transition-colors">Google</span>
+                    </button>
+                    <button class="flex items-center justify-center gap-2 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl transition-all duration-300 group">
+                        <svg class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12,2C6.477,2,2,6.477,2,12c0,4.419,2.865,8.166,6.839,9.489c0.5,0.092,0.682-0.217,0.682-0.482 c0-0.237-0.008-0.866-0.013-1.7c-2.782,0.603-3.369-1.34-3.369-1.34c-0.454-1.156-1.11-1.462-1.11-1.462 c-0.908-0.62,0.069-0.608,0.069-0.608c1.003,0.071,1.531,1.03,1.531,1.03c0.892,1.529,2.341,1.087,2.91,0.832 c0.091-0.647,0.349-1.086,0.635-1.337c-2.22-0.253-4.555-1.11-4.555-4.943c0-1.091,0.39-1.984,1.03-2.682 c-0.103-0.253-0.446-1.27,0.098-2.646c0,0,0.84-0.269,2.75,1.025c0.798-0.222,1.654-0.333,2.504-0.337 c0.85,0.004,1.706,0.115,2.504,0.337c1.91-1.294,2.75-1.025,2.75-1.025c0.544,1.376,0.201,2.394,0.099,2.646 c0.64,0.699,1.028,1.591,1.028,2.682c0,3.841-2.337,4.687-4.565,4.935c0.359,0.309,0.678,0.919,0.678,1.852 c0,1.336-0.012,2.415-0.012,2.743c0,0.267,0.18,0.578,0.688,0.48C19.138,20.161,22,16.418,22,12C22,6.477,17.523,2,12,2z"/>
+                        </svg>
+                        <span class="text-sm text-gray-400 group-hover:text-white transition-colors">GitHub</span>
+                    </button>
+                </div>
+
+                <!-- Registro -->
+                <div class="mt-8 pt-6 border-t border-gray-700/50 text-center">
+                    <p class="text-gray-400">
+                        ¿Eres nuevo aquí? 
+                        <button onclick="openModal('register')" class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400 font-bold hover:from-indigo-300 hover:to-purple-300 transition-all duration-200">
+                            Crea tu cuenta gratis →
+                        </button>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    @keyframes float {
+        0%, 100% { transform: translateY(0px) scale(1); opacity: 0.3; }
+        50% { transform: translateY(-20px) scale(1.5); opacity: 0.8; }
+    }
+    .animate-float {
+        animation: float 4s ease-in-out infinite;
+    }
+</style>
 {% endblock %}
