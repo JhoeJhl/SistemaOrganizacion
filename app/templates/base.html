@@ -3,29 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Gestión de Estudios{% endblock %}</title>
+    <title>{% block title %}Estudios.io{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            950: '#030712',
+                            900: '#111827',
+                            800: '#1f2937',
+                            700: '#374151'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
     <style>
         body { font-family: 'Inter', sans-serif; }
-        input:-webkit-autofill {
-            -webkit-box-shadow: 0 0 0 30px #111827 inset !important;
-            -webkit-text-fill-color: white !important;
-        }
+        .sidebar-scroll::-webkit-scrollbar { width: 4px; }
+        .sidebar-scroll::-webkit-scrollbar-thumb { background: #374151; border-radius: 10px; }
+        .spa-fade-in { animation: fadeIn 0.3s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Light mode overrides for body */
+        .light body { background-color: #f9fafb; color: #111827; }
+        .dark body { background-color: #030712; color: #f3f4f6; }
     </style>
 </head>
-<body class="bg-gray-950 text-gray-200 min-h-full flex flex-col selection:bg-indigo-500/30">
+<body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-200 min-h-full selection:bg-indigo-500/30 overflow-hidden">
 
-    {% include 'components/navbar.html' %}
-    {% include 'components/alerts.html' %}
-    {% include 'components/auth_modals.html' %}
+    <div class="flex h-screen w-full">
+        <!-- Sidebar Navigation (Fixed Left) -->
+        {% if current_user.is_authenticated %}
+            {% include 'components/sidebar.html' %}
+        {% endif %}
 
-    <main class="flex-grow flex flex-col pt-20">
-        {% block content %}
-        {% endblock %}
-    </main>
+        <!-- Main Workspace -->
+        <div class="flex-1 flex flex-col min-w-0 relative">
+            {% include 'components/alerts.html' %}
+            {% include 'components/auth_modals.html' %}
 
-    {% include 'components/footer.html' %}
+            <!-- Dynamic Content Area -->
+            <main id="spa-content" class="flex-grow overflow-y-auto spa-fade-in">
+                {% block content %}
+                {% endblock %}
+            </main>
+        </div>
+    </div>
 
+    <!-- SPA Engine -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const contentArea = document.getElementById('spa-content');
+
+            const loadPage = async (url, pushState = true) => {
+                // Indicador de carga sutil
+                contentArea.style.opacity = '0.5';
+                
+                try {
+                    const response = await fetch(url, {
+                        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                    });
+                    
+                    if (!response.ok) throw new Error('Network error');
+                    
+                    const html = await response.text();
+                    
+                    // Actualizar solo el área de contenido
+                    contentArea.innerHTML = html;
+                    contentArea.style.opacity = '1';
+                    contentArea.classList.remove('spa-fade-in');
+                    void contentArea.offsetWidth; // Trigger reflow
+                    contentArea.classList.add('spa-fade-in');
+
+                    // Actualizar URL y Título si es necesario
+                    if (pushState) {
+                        history.pushState({ url }, '', url);
+                        const newTitle = contentArea.querySelector('title-fragment')?.innerText;
+                        if (newTitle) document.title = newTitle;
+                    }
+
+                    // Re-ejecutar scripts si la nueva sección los tiene
+                    const scripts = contentArea.querySelectorAll('script');
+                    scripts.forEach(oldScript => {
+                        const newScript = document.createElement('script');
+                        Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                        newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                        oldScript.parentNode.replaceChild(newScript, oldScript);
+                    });
+
+                    // Hacer scroll al inicio
+                    contentArea.scrollTo(0, 0);
+
+                } catch (error) {
+                    console.error('SPA Load Error:', error);
+                    window.location.href = url; // Fallback a recarga normal
+                }
+            };
+
+            // Interceptar clicks en enlaces
+            document.addEventListener('click', (e) => {
+                const link = e.target.closest('a');
+                if (!link) return;
+
+                const url = link.getAttribute('href');
+                
+                // Solo interceptar enlaces internos, que no sean logout y que no tengan target="_blank"
+                if (url && 
+                    url.startsWith('/') && 
+                    !url.includes('logout') && 
+                    !url.startsWith('/api/auth') &&
+                    link.target !== '_blank') {
+                    
+                    e.preventDefault();
+                    loadPage(url);
+                }
+            });
+
+            // Manejar botón atrás/adelante del navegador
+            window.addEventListener('popstate', (e) => {
+                if (e.state && e.state.url) {
+                    loadPage(e.state.url, false);
+                } else {
+                    location.reload();
+                }
+            });
+        });
+    </script>
 </body>
 </html>

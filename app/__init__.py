@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from app.extensions import db, bcrypt, migrate, login_manager
 from app.models.user import User
 from app.config import Config
@@ -28,7 +28,10 @@ def create_app():
     app.register_blueprint(main_bp, url_prefix='/')
     app.register_blueprint(study_bp, url_prefix='/study')
 
-    login_manager.login_view = 'auth.login'
-    login_manager.login_message_category = 'info'
+    @app.context_processor
+    def inject_base():
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return {'base_template': 'spa_base.html'}
+        return {'base_template': 'base.html'}
 
     return app
