@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+
+{% block title %}Sesiones de Estudio - Estudios.io{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
+    <!-- Active Session Banner -->
+    {% set active_session = sessions|selectattr('end_time', 'none')|first %}
+    {% if active_session %}
+    <div class="mb-10 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-3xl p-8 shadow-2xl shadow-indigo-500/20 relative overflow-hidden group">
+        <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+        <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-5">
+                <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center animate-pulse">
+                    <div class="w-4 h-4 bg-white rounded-full"></div>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold text-white tracking-tight">Sesión en Curso ✍️</h2>
+                    <p class="text-indigo-100 font-medium">Estudiando: <span class="font-bold">{{ active_session.subject.name }}</span></p>
+                    <p class="text-xs text-indigo-200 mt-1">Iniciada a las {{ active_session.start_time.strftime('%H:%M') }}</p>
+                </div>
+            </div>
+            <form action="{{ url_for('study.stop_session', id=active_session.id) }}" method="POST">
+                <button type="submit" class="bg-white text-indigo-600 hover:bg-indigo-50 px-8 py-4 rounded-2xl font-bold transition-all shadow-xl active:scale-95">
+                    Finalizar Sesión
+                </button>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
+        <div>
+            <h1 class="text-4xl font-extrabold text-white tracking-tight">Registro de Estudio ⏱️</h1>
+            <p class="text-gray-400 mt-2">Controla el tiempo invertido en tu aprendizaje.</p>
+        </div>
+        {% if not active_session %}
+        <button onclick="openSessionModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-2xl font-bold transition-all shadow-xl shadow-emerald-500/25 flex items-center gap-2 active:scale-95">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+            </svg>
+            Nueva Sesión
+        </button>
+        {% endif %}
+    </div>
+
+    <!-- History -->
+    <div class="bg-gray-900 border border-gray-800 rounded-3xl overflow-hidden shadow-xl">
+        <div class="p-6 border-b border-gray-800">
+            <h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest">Historial de Sesiones</h3>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead>
+                    <tr class="text-[10px] text-gray-500 font-bold uppercase tracking-widest border-b border-gray-800 bg-gray-950/50">
+                        <th class="px-6 py-4">Fecha</th>
+                        <th class="px-6 py-4">Materia</th>
+                        <th class="px-6 py-4">Inicio - Fin</th>
+                        <th class="px-6 py-4">Duración</th>
+                        <th class="px-6 py-4">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-800">
+                    {% for session in sessions if session.end_time %}
+                    <tr class="hover:bg-white/5 transition-colors group">
+                        <td class="px-6 py-4 text-sm text-white font-medium">{{ session.start_time.strftime('%d %b, %Y') }}</td>
+                        <td class="px-6 py-4">
+                            <span class="text-sm text-indigo-400 font-bold">{{ session.subject.name }}</span>
+                        </td>
+                        <td class="px-6 py-4 text-xs text-gray-400">
+                            {{ session.start_time.strftime('%H:%M') }} - {{ session.end_time.strftime('%H:%M') }}
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="px-3 py-1 bg-gray-800 text-gray-300 text-xs font-bold rounded-lg">{{ session.duration }} min</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <form action="{{ url_for('study.delete_session', id=session.id) }}" method="POST" onsubmit="return confirm('¿Eliminar este registro?')">
+                                <button type="submit" class="p-2 text-gray-600 hover:text-red-400 transition-colors opacity-0 group-hover:opacity-100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% else %}
+                    {% if not active_session %}
+                    <tr>
+                        <td colspan="5" class="px-6 py-20 text-center text-gray-500">No hay registros de sesiones de estudio.</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Nueva Sesión -->
+<div id="sessionModal" class="fixed inset-0 bg-gray-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
+    <div class="w-full max-w-lg bg-gray-900 rounded-3xl shadow-2xl border border-white/10 overflow-hidden animate-in zoom-in-95 duration-200">
+        <div class="p-8 md:p-10">
+            <div class="flex justify-between items-start mb-8">
+                <div>
+                    <h2 class="text-3xl font-bold text-white tracking-tight">Iniciar Sesión</h2>
+                    <p class="text-gray-400 mt-2 text-sm">¿Qué vas a estudiar ahora?</p>
+                </div>
+                <button onclick="closeSessionModal()" class="text-gray-500 hover:text-white transition-colors bg-white/5 p-2 rounded-xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <form action="{{ url_for('study.start_session') }}" method="POST" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Materia</label>
+                    <select name="subject_id" id="sessionSubject" required onchange="loadTopics(this.value)"
+                        class="w-full px-5 py-4 bg-gray-950 border-2 border-gray-800 rounded-2xl text-white focus:outline-none focus:border-indigo-500 transition-all">
+                        <option value="">Selecciona una materia</option>
+                        {% for subject in subjects %}
+                        <option value="{{ subject.id }}">{{ subject.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Tema (Opcional)</label>
+                    <select name="topic_id" id="sessionTopic"
+                        class="w-full px-5 py-4 bg-gray-950 border-2 border-gray-800 rounded-2xl text-white focus:outline-none focus:border-indigo-500 transition-all">
+                        <option value="">Primero selecciona una materia</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 px-4 rounded-2xl transition-all shadow-xl shadow-emerald-500/25 active:scale-95">
+                    ¡Comenzar a Estudiar!
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openSessionModal() {
+        const modal = document.getElementById('sessionModal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeSessionModal() {
+        const modal = document.getElementById('sessionModal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = 'auto';
+    }
+
+    function loadTopics(subjectId) {
+        const topicSelect = document.getElementById('sessionTopic');
+        topicSelect.innerHTML = '<option value="">Cargando temas...</option>';
+        
+        if (!subjectId) {
+            topicSelect.innerHTML = '<option value="">Primero selecciona una materia</option>';
+            return;
+        }
+
+        fetch(`/study/api/topics/${subjectId}`)
+        .then(response => response.json())
+        .then(topics => {
+            topicSelect.innerHTML = '<option value="">Ningún tema en específico</option>';
+            topics.forEach(topic => {
+                const opt = document.createElement('option');
+                opt.value = topic.id;
+                opt.textContent = topic.title;
+                topicSelect.appendChild(opt);
+            });
+        });
+    }
+
+    document.getElementById('sessionModal').addEventListener('click', function(e) {
+        if (e.target === this) closeSessionModal();
+    });
+</script>
+{% endblock %}
