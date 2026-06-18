@@ -5,11 +5,11 @@
 {% block content %}
 <div class="min-h-[calc(100vh-80px)] flex items-center justify-center p-4 relative overflow-hidden">
     <!-- Background dinámico -->
-    <div class="absolute inset-0 bg-gradient-to-br from-purple-950 via-gray-950 to-indigo-950"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-purple-50 via-gray-50 to-indigo-50 dark:from-purple-950 dark:via-gray-950 dark:to-indigo-950 transition-colors duration-300"></div>
     
     <!-- Elementos decorativos flotantes -->
-    <div class="absolute top-10 right-20 w-80 h-80 bg-purple-600/20 rounded-full blur-3xl animate-pulse"></div>
-    <div class="absolute bottom-20 left-10 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+    <div class="absolute top-10 right-20 w-80 h-80 bg-purple-650/10 dark:bg-purple-600/20 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-20 left-10 w-96 h-96 bg-indigo-650/10 dark:bg-indigo-600/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
     
     <!-- Card Principal -->
     <div class="w-full max-w-lg relative z-10">
@@ -17,7 +17,7 @@
         <div class="text-center mb-8">
             <div class="inline-block relative">
                 <div class="absolute inset-0 bg-gradient-to-r from-purple-500 to-indigo-500 blur-2xl opacity-50"></div>
-                <div class="relative bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-xl border border-white/10 rounded-3xl p-6 inline-block shadow-2xl">
+                <div class="relative bg-white dark:bg-gradient-to-br dark:from-gray-900/80 dark:to-gray-800/80 backdrop-blur-xl border border-gray-250 dark:border-white/10 rounded-3xl p-6 inline-block shadow-2xl">
                     <div class="flex items-center gap-3">
                         <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-purple-500/25">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -25,8 +25,8 @@
                             </svg>
                         </div>
                         <div>
-                            <h1 class="text-2xl font-bold text-white tracking-tight">Estudios<span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">.io</span></h1>
-                            <p class="text-xs text-gray-400">Organiza tu éxito académico</p>
+                            <h1 class="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">Estudios<span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-650 to-indigo-650 dark:from-purple-400 dark:to-indigo-400">.io</span></h1>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">Organiza tu éxito académico</p>
                         </div>
                     </div>
                 </div>
@@ -34,22 +34,22 @@
         </div>
 
         <!-- Formulario -->
-        <div class="bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl overflow-hidden">
+        <div class="bg-white dark:bg-gradient-to-br dark:from-gray-900/90 dark:to-gray-800/90 backdrop-blur-xl rounded-3xl border border-gray-200 dark:border-white/10 shadow-2xl overflow-hidden">
             <div class="p-8 md:p-10">
                 <!-- Encabezado -->
                 <div class="mb-8">
-                    <h2 class="text-3xl font-bold text-white tracking-tight">Únete a la comunidad 🚀</h2>
-                    <p class="text-gray-400 mt-2">Comienza tu viaje hacia el éxito académico</p>
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">Únete a la comunidad 🚀</h2>
+                    <p class="text-gray-500 dark:text-gray-400 mt-2">Comienza tu viaje hacia el éxito académico</p>
                 </div>
 
                 <!-- Form -->
                 {% include 'components/forms/register_form.html' %}
 
                 <!-- Enlace Login -->
-                <div class="mt-8 pt-6 border-t border-gray-700/50 text-center">
-                    <p class="text-gray-400">
+                <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700/50 text-center">
+                    <p class="text-gray-600 dark:text-gray-400">
                         ¿Ya tienes cuenta? 
-                        <button onclick="openModal('login')" class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400 font-bold hover:from-purple-300 hover:to-indigo-300 transition-all duration-200">
+                        <button onclick="openModal('login')" class="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-purple-400 dark:to-indigo-400 font-bold hover:from-purple-500 hover:to-indigo-500 transition-all duration-200">
                             Inicia sesión aquí →
                         </button>
                     </p>

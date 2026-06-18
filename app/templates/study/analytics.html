@@ -20,42 +20,42 @@
 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full relative">
     
     <!-- Header -->
-    <div class="mb-10 bg-gray-900 border border-gray-800 p-8 rounded-[2rem] shadow-xl">
-        <h1 class="text-3xl md:text-5xl font-black text-white tracking-tight">
+    <div class="mb-10 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-8 rounded-[2rem] shadow-xl">
+        <h1 class="text-3xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight">
             Informe de <span class="text-indigo-500">Rendimiento</span>
         </h1>
-        <p class="text-gray-500 mt-2 font-medium">Estadísticas reales basadas en tu actividad de estudio.</p>
+        <p class="text-gray-600 dark:text-gray-500 mt-2 font-medium">Estadísticas reales basadas en tu actividad de estudio.</p>
     </div>
 
     <!-- Cards Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
         
         <!-- Total Hours -->
-        <div class="bg-gray-900 border border-gray-800 p-6 rounded-3xl hover:border-indigo-500/50 transition-colors">
+        <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6 rounded-3xl hover:border-indigo-500/50 transition-colors shadow-sm dark:shadow-none">
             <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">Horas Totales</p>
-            <h2 class="text-4xl font-black text-white">{{ total_hours | default(0) }}h</h2>
+            <h2 class="text-4xl font-black text-gray-900 dark:text-white">{{ total_hours | default(0) }}h</h2>
             <p class="text-xs text-gray-600 mt-2">Inversión académica</p>
         </div>
 
         <!-- Global Progress -->
-        <div class="bg-gray-900 border border-gray-800 p-6 rounded-3xl hover:border-indigo-500/50 transition-colors">
+        <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6 rounded-3xl hover:border-indigo-500/50 transition-colors shadow-sm dark:shadow-none">
             <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">Progreso</p>
-            <h2 class="text-4xl font-black text-white">{{ progress_percent | default(0) | round | int }}%</h2>
-            <div class="mt-4 w-full h-2 bg-gray-800 rounded-full overflow-hidden">
+            <h2 class="text-4xl font-black text-gray-900 dark:text-white">{{ progress_percent | default(0) | round | int }}%</h2>
+            <div class="mt-4 w-full h-2 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
                 <!-- JS will set the width here -->
-                <div id="pb-global" class="h-full bg-indigo-500 transition-all duration-1000" style="width: 0%"></div>
+                <div id="pb-global" class="h-full bg-indigo-600 dark:bg-indigo-500 transition-all duration-1000" style="width: 0%"></div>
             </div>
         </div>
 
         <!-- Topics -->
-        <div class="bg-gray-900 border border-gray-800 p-6 rounded-3xl hover:border-indigo-500/50 transition-colors">
+        <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6 rounded-3xl hover:border-indigo-500/50 transition-colors shadow-sm dark:shadow-none">
             <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">Temas</p>
-            <h2 class="text-4xl font-black text-white">{{ completed_topics | default(0) }}</h2>
+            <h2 class="text-4xl font-black text-gray-900 dark:text-white">{{ completed_topics | default(0) }}</h2>
             <p class="text-xs text-gray-600 mt-2">De {{ total_topics | default(0) }} registrados</p>
         </div>
 
         <!-- Streak -->
-        <div class="bg-gray-900 border border-gray-800 p-6 rounded-3xl hover:border-indigo-500/50 transition-colors">
+        <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6 rounded-3xl hover:border-indigo-500/50 transition-colors shadow-sm dark:shadow-none">
             <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">Racha</p>
             <h2 class="text-4xl font-black text-amber-500">{{ study_streak | default(0) }} 🔥</h2>
             <p class="text-xs text-gray-600 mt-2">Días seguidos</p>
@@ -69,22 +69,22 @@
         <!-- Chart Column -->
         <div class="lg:col-span-2 space-y-8">
             <!-- Subject Chart Card -->
-            <div class="bg-gray-900 border border-gray-800 rounded-[2.5rem] p-8 shadow-2xl">
-                <h3 class="text-xl font-bold text-white mb-8">Horas por Materia</h3>
+            <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-[2.5rem] p-8 shadow-md dark:shadow-2xl">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-8">Horas por Materia</h3>
                 <div class="h-[300px] w-full">
                     <canvas id="subjectChart"></canvas>
                 </div>
             </div>
 
             <!-- Weekly Bar Card -->
-            <div class="bg-gray-900 border border-gray-800 rounded-[2.5rem] p-8 shadow-2xl">
-                <h3 class="text-xl font-bold text-white mb-8">Actividad Semanal</h3>
+            <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-[2.5rem] p-8 shadow-md dark:shadow-2xl">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-8">Actividad Semanal</h3>
                 <div id="weekly-bars" class="flex items-end justify-between gap-3 h-40">
                     <!-- Bars injected by JS -->
                 </div>
                 <div class="grid grid-cols-7 gap-3 mt-4">
                     {% for d in ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'] %}
-                    <span class="text-center text-[10px] font-bold text-gray-600 uppercase">{{ d }}</span>
+                    <span class="text-center text-[10px] font-bold text-gray-500 dark:text-gray-600 uppercase">{{ d }}</span>
                     {% endfor %}
                 </div>
             </div>
@@ -92,8 +92,8 @@
 
         <!-- Insights Column -->
         <div class="space-y-6">
-            <div class="bg-gray-900 border border-gray-800 rounded-[2.5rem] p-8 shadow-2xl h-full">
-                <h3 class="text-xl font-bold text-white mb-6">Detalle por Materia</h3>
+            <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-[2.5rem] p-8 shadow-md dark:shadow-2xl h-full">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6">Detalle por Materia</h3>
                 <div id="subjects-list" class="space-y-6">
                     <!-- List items injected by JS -->
                 </div>
@@ -105,10 +105,9 @@
 </div>
 
 <!-- Core Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 (function() {
-    document.addEventListener('DOMContentLoaded', function() {
+    function initAnalytics() {
         // 1. Parse payload
         const payloadEl = document.getElementById('analytics-payload');
         if (!payloadEl) return;
@@ -126,18 +125,19 @@
         // 3. Weekly Bars
         const weeklyContainer = document.getElementById('weekly-bars');
         if (weeklyContainer) {
+            weeklyContainer.innerHTML = '';
             const maxH = Math.max(...data.weeklyHours, 1);
             data.weeklyHours.forEach(h => {
                 const barBox = document.createElement('div');
-                barBox.className = "flex-1 bg-gray-800/40 rounded-xl flex items-end overflow-hidden h-full relative group";
+                barBox.className = "flex-1 bg-gray-100 dark:bg-gray-800/40 rounded-xl flex items-end overflow-hidden h-full relative group";
                 
                 const bar = document.createElement('div');
-                bar.className = "w-full bg-indigo-500 transition-all duration-700 rounded-t-xl group-hover:brightness-125";
+                bar.className = "w-full bg-indigo-600 dark:bg-indigo-500 transition-all duration-700 rounded-t-xl group-hover:brightness-110 dark:group-hover:brightness-125";
                 const hPerc = (h / maxH * 100);
                 bar.style.height = (hPerc > 5 ? hPerc : 5) + '%';
                 
                 const label = document.createElement('div');
-                label.className = "absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 text-[10px] font-black text-white transition-opacity";
+                label.className = "absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 text-[10px] font-black text-gray-900 dark:text-white transition-opacity";
                 label.innerText = h + 'h';
 
                 barBox.appendChild(bar);
@@ -149,8 +149,9 @@
         // 4. Subjects List
         const listContainer = document.getElementById('subjects-list');
         if (listContainer) {
+            listContainer.innerHTML = '';
             if (data.chartLabels.length === 0) {
-                listContainer.innerHTML = '<p class="text-gray-600 italic text-center py-10">Sin datos registrados aún</p>';
+                listContainer.innerHTML = '<p class="text-gray-500 dark:text-gray-600 italic text-center py-10">Sin datos registrados aún</p>';
             } else {
                 const maxVal = Math.max(...data.chartData, 1);
                 data.chartLabels.forEach((label, i) => {
@@ -159,11 +160,11 @@
                     const item = document.createElement('div');
                     item.innerHTML = `
                         <div class="flex justify-between mb-2">
-                            <span class="text-sm font-bold text-gray-300">${label}</span>
-                            <span class="text-xs font-black text-white">${val}h</span>
+                            <span class="text-sm font-bold text-gray-700 dark:text-gray-300">${label}</span>
+                            <span class="text-xs font-black text-gray-900 dark:text-white">${val}h</span>
                         </div>
-                        <div class="w-full h-1.5 bg-gray-800 rounded-full overflow-hidden">
-                            <div class="h-full bg-indigo-500" style="width: ${perc}%"></div>
+                        <div class="w-full h-1.5 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
+                            <div class="h-full bg-indigo-600 dark:bg-indigo-500" style="width: ${perc}%"></div>
                         </div>
                     `;
                     listContainer.appendChild(item);
@@ -173,45 +174,61 @@
 
         // 5. Chart.js
         const canvas = document.getElementById('subjectChart');
-        if (canvas && data.chartLabels.length > 0) {
-            new Chart(canvas, {
-                type: 'bar',
-                data: {
-                    labels: data.chartLabels,
-                    datasets: [{
-                        data: data.chartData,
-                        backgroundColor: 'rgba(99, 102, 241, 0.2)',
-                        borderColor: '#6366f1',
-                        borderWidth: 2,
-                        borderRadius: 10,
-                        barPercentage: 0.5
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        y: { 
-                            beginAtZero: true, 
-                            grid: { color: 'rgba(255,255,255,0.03)', drawBorder: false },
-                            ticks: { color: '#4b5563', font: { size: 11 } }
-                        },
-                        x: { 
-                            grid: { display: false },
-                            ticks: { color: '#9ca3af', font: { size: 10, weight: 'bold' } }
+        if (canvas) {
+            const isDark = document.documentElement.classList.contains('dark');
+            const gridColor = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
+            const tickColor = isDark ? '#9ca3af' : '#4b5563';
+
+            if (data.chartLabels.length > 0) {
+                if (window.mySubjectChart) {
+                    window.mySubjectChart.destroy();
+                }
+                window.mySubjectChart = new Chart(canvas, {
+                    type: 'bar',
+                    data: {
+                        labels: data.chartLabels,
+                        datasets: [{
+                            data: data.chartData,
+                            backgroundColor: 'rgba(99, 102, 241, 0.2)',
+                            borderColor: '#6366f1',
+                            borderWidth: 2,
+                            borderRadius: 10,
+                            barPercentage: 0.5
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { 
+                                beginAtZero: true, 
+                                grid: { color: gridColor, drawBorder: false },
+                                ticks: { color: tickColor, font: { size: 11 } }
+                            },
+                            x: { 
+                                grid: { display: false },
+                                ticks: { color: tickColor, font: { size: 10, weight: 'bold' } }
+                            }
                         }
                     }
-                }
-            });
-        } else if (canvas) {
-            const ctx = canvas.getContext('2d');
-            ctx.font = "14px sans-serif";
-            ctx.fillStyle = "#4b5563";
-            ctx.textAlign = "center";
-            ctx.fillText("Comienza a estudiar para ver tus estadísticas", canvas.width/2, canvas.height/2);
+                });
+            } else {
+                const ctx = canvas.getContext('2d');
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.font = "14px sans-serif";
+                ctx.fillStyle = tickColor;
+                ctx.textAlign = "center";
+                ctx.fillText("Comienza a estudiar para ver tus estadísticas", canvas.width/2, canvas.height/2);
+            }
         }
-    });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAnalytics);
+    } else {
+        initAnalytics();
+    }
 })();
 </script>
 {% endblock %}

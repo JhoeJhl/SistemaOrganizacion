@@ -12,6 +12,9 @@ def create_app():
     bcrypt.init_app(app)
     migrate.init_app(app, db)
     login_manager.init_app(app)
+    login_manager.login_view = 'auth.login'
+    login_manager.login_message = 'Por favor, inicia sesión para acceder a esta página.'
+    login_manager.login_message_category = 'error'
 
     # Configuración de Flask-Login para cargar al usuario en memoria
     @login_manager.user_loader

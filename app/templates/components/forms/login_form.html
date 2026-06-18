@@ -1,17 +1,17 @@
-<form method="POST" action="{{ url_for('auth.login') }}" class="space-y-6">
+<form id="loginForm" method="POST" action="{{ url_for('auth.login') }}" class="space-y-6">
     <!-- Campo Usuario -->
     <div class="group">
-        <label class="block text-sm font-medium text-gray-300 mb-2">
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Usuario o Email
         </label>
         <div class="relative">
             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <svg class="h-5 w-5 text-gray-500 group-focus-within:text-indigo-400 transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <svg class="h-5 w-5 text-gray-400 dark:text-gray-500 group-focus-within:text-indigo-600 dark:group-focus-within:text-indigo-400 transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                 </svg>
             </div>
             <input type="text" name="username" required
-                class="w-full pl-12 pr-4 py-3.5 bg-gray-950/50 border-2 border-gray-700/50 rounded-2xl text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 transition-all duration-300"
+                class="w-full pl-12 pr-4 py-3.5 bg-gray-50/50 dark:bg-gray-950/50 border-2 border-gray-200 dark:border-gray-700/50 rounded-2xl text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 transition-all duration-300"
                 placeholder="ej: juan_perez">
         </div>
     </div>
@@ -19,23 +19,23 @@
     <!-- Campo Contraseña -->
     <div class="group">
         <div class="flex items-center justify-between mb-2">
-            <label class="block text-sm font-medium text-gray-300">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 Contraseña
             </label>
-            <a href="#" class="text-xs text-indigo-400 hover:text-indigo-300 transition-colors duration-200 font-medium hover:underline underline-offset-2">
+            <a href="#" class="text-xs text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors duration-200 font-medium hover:underline underline-offset-2">
                 ¿Olvidaste tu contraseña?
             </a>
         </div>
         <div class="relative">
             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <svg class="h-5 w-5 text-gray-500 group-focus-within:text-indigo-400 transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <svg class="h-5 w-5 text-gray-400 dark:text-gray-500 group-focus-within:text-indigo-600 dark:group-focus-within:text-indigo-400 transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
                 </svg>
             </div>
             <input type="password" name="password" required id="password"
-                class="w-full pl-12 pr-12 py-3.5 bg-gray-950/50 border-2 border-gray-700/50 rounded-2xl text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 transition-all duration-300"
+                class="w-full pl-12 pr-12 py-3.5 bg-gray-50/50 dark:bg-gray-950/50 border-2 border-gray-200 dark:border-gray-700/50 rounded-2xl text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 transition-all duration-300"
                 placeholder="••••••••">
-            <button type="button" onclick="togglePassword()" class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-500 hover:text-gray-300 transition-colors">
+            <button type="button" onclick="togglePassword()" class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 transition-colors">
                 <svg id="eyeIcon" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -48,19 +48,19 @@
     <div class="flex items-center justify-between">
         <label class="flex items-center gap-2 cursor-pointer group">
             <input type="checkbox" name="remember" 
-                class="w-4 h-4 bg-gray-950 border-2 border-gray-600 rounded-md text-indigo-600 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition-all duration-200">
-            <span class="text-sm text-gray-400 group-hover:text-gray-300 transition-colors">Recordarme</span>
+                class="w-4 h-4 bg-white dark:bg-gray-950 border-2 border-gray-300 dark:border-gray-600 rounded-md text-indigo-600 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition-all duration-200">
+            <span class="text-sm text-gray-600 dark:text-gray-400 group-hover:text-gray-800 dark:group-hover:text-gray-300 transition-colors">Recordarme</span>
         </label>
         <div class="flex items-center gap-2">
             <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-            <span class="text-xs text-gray-500">Conexión segura</span>
+            <span class="text-xs text-gray-500 dark:text-gray-400">Conexión segura</span>
         </div>
     </div>
 
     <!-- Botón -->
     <button type="submit"
         class="group relative w-full py-4 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-[length:200%_100%] hover:bg-[position:100%_0] text-white font-bold rounded-2xl transition-all duration-500 shadow-xl shadow-indigo-500/25 hover:shadow-indigo-500/50 active:scale-[0.98] overflow-hidden">
-        <span class="relative z-10 flex items-center justify-center gap-3 text-lg">
+        <span id="loginBtnText" class="relative z-10 flex items-center justify-center gap-3 text-lg">
             Iniciar Sesión
             <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
@@ -81,4 +81,74 @@
             eyeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />`;
         }
     }
+
+    function showTempAlert(message, category = 'error') {
+        const container = document.getElementById('flash-alerts-container') || (() => {
+            const div = document.createElement('div');
+            div.id = 'flash-alerts-container';
+            div.className = 'fixed top-24 left-1/2 -translate-x-1/2 z-50 space-y-2 max-w-sm w-full px-4 flex flex-col items-center';
+            document.body.appendChild(div);
+            return div;
+        })();
+
+        const alert = document.createElement('div');
+        const bgBorderText = category === 'error' 
+            ? 'bg-red-500/10 border-red-500/50 text-red-400' 
+            : 'bg-emerald-500/10 border-emerald-500/50 text-emerald-400';
+        alert.className = `p-4 rounded-xl border flex items-start gap-3 shadow-2xl animate-in fade-in zoom-in-95 duration-300 w-full ${bgBorderText}`;
+        
+        alert.innerHTML = `
+            <div class="flex-grow text-center text-sm font-medium">
+                ${message}
+            </div>
+            <button class="text-current opacity-50 hover:opacity-100 transition-opacity">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+            </button>
+        `;
+
+        alert.querySelector('button').addEventListener('click', () => alert.remove());
+        container.appendChild(alert);
+
+        setTimeout(() => {
+            alert.classList.add('animate-out', 'fade-out', 'zoom-out-95', 'duration-300');
+            setTimeout(() => alert.remove(), 300);
+        }, 2000);
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        const btnText = document.getElementById('loginBtnText');
+        const originalText = btnText.innerHTML;
+
+        btnText.innerHTML = '<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Cargando...';
+
+        try {
+            const response = await fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            });
+
+            if (response.redirected) {
+                window.location.href = response.url;
+            } else {
+                const result = await response.text();
+                if (response.ok && !result.includes('Usuario o contraseña incorrectos')) {
+                    window.location.reload();
+                } else {
+                    showTempAlert('Usuario o contraseña incorrectos');
+                    btnText.innerHTML = originalText;
+                }
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            showTempAlert('Error al conectar con el servidor');
+            btnText.innerHTML = originalText;
+        }
+    });
 </script>

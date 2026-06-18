@@ -2,14 +2,14 @@
 <div id="modalOverlay" class="fixed inset-0 bg-gray-950/90 backdrop-blur-md z-[100] hidden items-center justify-center p-4">
     
     <!-- Modal de Login -->
-    <div id="loginModal" class="w-full max-w-lg bg-gray-900 rounded-3xl shadow-2xl border border-white/10 overflow-hidden hidden animate-in zoom-in-95 duration-200">
+    <div id="loginModal" class="w-full max-w-lg bg-white dark:bg-gray-900 rounded-3xl shadow-2xl border border-gray-200 dark:border-white/10 overflow-hidden hidden animate-in zoom-in-95 duration-200">
         <div class="p-8 md:p-10">
             <div class="flex justify-between items-start mb-8">
                 <div>
-                    <h2 class="text-3xl font-bold text-white tracking-tight">Iniciar Sesión 👋</h2>
-                    <p class="text-gray-400 mt-2 text-sm">Continúa tu camino al éxito</p>
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">Iniciar Sesión 👋</h2>
+                    <p class="text-gray-500 dark:text-gray-400 mt-2 text-sm">Continúa tu camino al éxito</p>
                 </div>
-                <button onclick="closeModals()" class="text-gray-500 hover:text-white transition-colors bg-white/5 p-2 rounded-xl">
+                <button onclick="closeModals()" class="text-gray-400 hover:text-gray-600 dark:hover:text-white transition-colors bg-gray-100 dark:bg-white/5 p-2 rounded-xl">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -18,23 +18,23 @@
 
             {% include 'components/forms/login_form.html' %}
 
-            <div class="mt-8 pt-6 border-t border-gray-800 text-center">
-                <p class="text-sm text-gray-500">¿No tienes cuenta? 
-                    <button onclick="switchModal('register')" class="text-indigo-400 hover:text-indigo-300 font-bold transition-colors">Regístrate gratis</button>
+            <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-800 text-center">
+                <p class="text-sm text-gray-500 dark:text-gray-400">¿No tienes cuenta? 
+                    <button onclick="switchModal('register')" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-bold transition-colors">Regístrate gratis</button>
                 </p>
             </div>
         </div>
     </div>
 
     <!-- Modal de Registro -->
-    <div id="registerModal" class="w-full max-w-lg bg-gray-900 rounded-3xl shadow-2xl border border-white/10 overflow-hidden hidden animate-in zoom-in-95 duration-200">
+    <div id="registerModal" class="w-full max-w-lg bg-white dark:bg-gray-900 rounded-3xl shadow-2xl border border-gray-200 dark:border-white/10 overflow-hidden hidden animate-in zoom-in-95 duration-200">
         <div class="p-8 md:p-10">
             <div class="flex justify-between items-start mb-8">
                 <div>
-                    <h2 class="text-3xl font-bold text-white tracking-tight">Crea tu cuenta 🚀</h2>
-                    <p class="text-gray-400 mt-2 text-sm">Únete a Estudios.io hoy mismo</p>
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">Crea tu cuenta 🚀</h2>
+                    <p class="text-gray-500 dark:text-gray-400 mt-2 text-sm">Únete a Estudios.io hoy mismo</p>
                 </div>
-                <button onclick="closeModals()" class="text-gray-500 hover:text-white transition-colors bg-white/5 p-2 rounded-xl">
+                <button onclick="closeModals()" class="text-gray-400 hover:text-gray-600 dark:hover:text-white transition-colors bg-gray-100 dark:bg-white/5 p-2 rounded-xl">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -43,9 +43,51 @@
 
             {% include 'components/forms/register_form.html' %}
 
-            <div class="mt-8 pt-6 border-t border-gray-800 text-center text-sm text-gray-500">
+            <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-800 text-center text-sm text-gray-500 dark:text-gray-400">
                 ¿Ya tienes cuenta? 
-                <button onclick="switchModal('login')" class="text-indigo-400 hover:text-indigo-300 font-bold transition-colors">Inicia sesión aquí</button>
+                <button onclick="switchModal('login')" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-bold transition-colors">Inicia sesión aquí</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Términos y Condiciones -->
+    <div id="termsModal" class="w-full max-w-2xl bg-white dark:bg-gray-900 rounded-3xl shadow-2xl border border-gray-200 dark:border-white/10 overflow-hidden hidden animate-in zoom-in-95 duration-200 max-h-[80vh] flex flex-col">
+        <div class="p-8 md:p-10 flex flex-col h-full overflow-hidden">
+            <div class="flex justify-between items-start mb-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">Términos y Condiciones ⚖️</h2>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Última actualización: Junio 2026</p>
+                </div>
+                <button onclick="closeModals()" class="text-gray-500 hover:text-gray-700 dark:hover:text-white transition-colors bg-gray-100 dark:bg-white/5 p-2 rounded-xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="flex-grow overflow-y-auto space-y-4 pr-2 text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                <p>Bienvenido a <strong>Estudios.io</strong>. Al utilizar nuestra plataforma, aceptas cumplir con los siguientes términos y condiciones. Por favor, léelos detenidamente antes de comenzar a usar nuestros servicios.</p>
+                
+                <h3 class="font-bold text-gray-900 dark:text-white text-base mt-4">1. Uso del Servicio</h3>
+                <p>Estudios.io proporciona herramientas de organización de materias, planificación y seguimiento del rendimiento escolar. Te comprometes a utilizar la plataforma únicamente con fines educativos y de carácter personal.</p>
+                
+                <h3 class="font-bold text-gray-900 dark:text-white text-base mt-4">2. Registro y Seguridad de la Cuenta</h3>
+                <p>Para utilizar ciertas funciones, debes crear una cuenta. Eres responsable de mantener la confidencialidad de tu contraseña y de todas las actividades que ocurran bajo tu cuenta.</p>
+                
+                <h3 class="font-bold text-gray-900 dark:text-white text-base mt-4">3. Privacidad de los Datos</h3>
+                <p>Tu privacidad es sumamente importante para nosotros. Todos los datos académicos, notas, horarios y tareas se guardan de forma segura y solo son accesibles por ti como usuario de la cuenta.</p>
+                
+                <h3 class="font-bold text-gray-900 dark:text-white text-base mt-4">4. Propiedad Intelectual</h3>
+                <p>Todos los contenidos, diseños, logotipos e interfaz gráfica de Estudios.io son propiedad intelectual de la plataforma y están protegidos por leyes de derechos de autor.</p>
+                
+                <h3 class="font-bold text-gray-900 dark:text-white text-base mt-4">5. Modificaciones del Servicio</h3>
+                <p>Nos reservamos el derecho de modificar, suspender o discontinuar cualquier parte del servicio en cualquier momento, con el fin de introducir mejoras de rendimiento o nuevas herramientas.</p>
+            </div>
+            
+            <div class="mt-6 pt-4 border-t border-gray-100 dark:border-gray-800 flex justify-end">
+                <button onclick="closeModals()" class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold rounded-xl transition-all shadow-lg shadow-indigo-500/20">
+                    Aceptar
+                </button>
             </div>
         </div>
     </div>
@@ -60,9 +102,15 @@
         if(type === 'login') {
             document.getElementById('loginModal').classList.remove('hidden');
             document.getElementById('registerModal').classList.add('hidden');
-        } else {
+            document.getElementById('termsModal').classList.add('hidden');
+        } else if(type === 'register') {
             document.getElementById('registerModal').classList.remove('hidden');
             document.getElementById('loginModal').classList.add('hidden');
+            document.getElementById('termsModal').classList.add('hidden');
+        } else {
+            document.getElementById('termsModal').classList.remove('hidden');
+            document.getElementById('loginModal').classList.add('hidden');
+            document.getElementById('registerModal').classList.add('hidden');
         }
     }
 
@@ -71,6 +119,7 @@
         document.getElementById('modalOverlay').classList.remove('flex');
         document.getElementById('loginModal').classList.add('hidden');
         document.getElementById('registerModal').classList.add('hidden');
+        document.getElementById('termsModal').classList.add('hidden');
         document.body.style.overflow = 'auto';
     }
 
@@ -78,9 +127,11 @@
         if(type === 'login') {
             document.getElementById('registerModal').classList.add('hidden');
             document.getElementById('loginModal').classList.remove('hidden');
+            document.getElementById('termsModal').classList.add('hidden');
         } else {
             document.getElementById('loginModal').classList.add('hidden');
             document.getElementById('registerModal').classList.remove('hidden');
+            document.getElementById('termsModal').classList.add('hidden');
         }
     }
 

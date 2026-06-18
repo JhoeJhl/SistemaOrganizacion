@@ -3,22 +3,149 @@
 {% block title %}Estudios.io - Organiza tu éxito académico{% endblock %}
 
 {% block content %}
-<div class="relative overflow-hidden">
+<!-- Navbar -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/75 dark:bg-gray-950/50 backdrop-blur-xl border-b border-gray-200/50 dark:border-white/5 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+            <!-- Logo -->
+            <div class="flex-shrink-0 flex items-center gap-2">
+                <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                </div>
+                <span class="text-xl font-black text-gray-900 dark:text-white tracking-tight">Estudy<span class="text-indigo-500">.io</span></span>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#" class="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">Inicio</a>
+                <a href="#features" class="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">Características</a>
+                <div class="h-4 w-px bg-gray-200 dark:bg-gray-800"></div>
+                
+                <!-- Theme Toggle Button -->
+                <button id="landing-theme-toggle" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors p-2 rounded-xl bg-gray-100 dark:bg-white/5">
+                    <!-- Sun Icon (visible in dark mode) -->
+                    <svg id="landing-theme-toggle-light-icon" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 9H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                    </svg>
+                    <!-- Moon Icon (visible in light mode) -->
+                    <svg id="landing-theme-toggle-dark-icon" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+
+                <button onclick="openModal('login')" class="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">Iniciar Sesión</button>
+                <button onclick="openModal('register')" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold rounded-xl transition-all shadow-lg shadow-indigo-500/20">
+                    Registrarse
+                </button>
+            </div>
+
+            <!-- Mobile Menu Button & Theme Toggle -->
+            <div class="md:hidden flex items-center gap-2">
+                <button id="mobile-landing-theme-toggle" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors p-2 rounded-xl bg-gray-100 dark:bg-white/5">
+                    <!-- Sun Icon (visible in dark mode) -->
+                    <svg id="mobile-landing-theme-toggle-light-icon" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 9H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                    </svg>
+                    <!-- Moon Icon (visible in light mode) -->
+                    <svg id="mobile-landing-theme-toggle-dark-icon" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+                <button onclick="toggleMobileMenu()" type="button" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white p-2">
+                    <svg id="mobile-menu-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border-b border-gray-200/50 dark:border-white/5 animate-in slide-in-from-top duration-300">
+        <div class="px-4 pt-2 pb-6 space-y-2">
+            <a href="#" class="block px-3 py-4 text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-white/5 rounded-xl transition-all" onclick="toggleMobileMenu()">Inicio</a>
+            <a href="#features" class="block px-3 py-4 text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-white/5 rounded-xl transition-all" onclick="toggleMobileMenu()">Características</a>
+            <div class="pt-4 border-t border-gray-200 dark:border-gray-800 flex flex-col gap-3">
+                <button onclick="openModal('login'); toggleMobileMenu()" class="w-full text-center py-4 text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-all">Iniciar Sesión</button>
+                <button onclick="openModal('register'); toggleMobileMenu()" class="w-full py-4 bg-indigo-600 text-white text-base font-bold rounded-xl shadow-lg shadow-indigo-500/20 transition-all">
+                    Registrarse
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<script>
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        const icon = document.getElementById('mobile-menu-icon');
+        const isHidden = menu.classList.contains('hidden');
+        
+        if (isHidden) {
+            menu.classList.remove('hidden');
+            icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />';
+        } else {
+            menu.classList.add('hidden');
+            icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />';
+        }
+    }
+
+    // Theme toggle logic
+    const setupThemeToggle = (btnId, sunIconId, moonIconId) => {
+        const btn = document.getElementById(btnId);
+        const sun = document.getElementById(sunIconId);
+        const moon = document.getElementById(moonIconId);
+
+        if (!btn) return;
+
+        const updateUI = () => {
+            if (document.documentElement.classList.contains('dark')) {
+                sun.classList.remove('hidden');
+                moon.classList.add('hidden');
+            } else {
+                moon.classList.remove('hidden');
+                sun.classList.add('hidden');
+            }
+        };
+
+        updateUI();
+
+        btn.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+            window.dispatchEvent(new Event('theme-changed'));
+        });
+
+        window.addEventListener('theme-changed', updateUI);
+    };
+
+    setupThemeToggle('landing-theme-toggle', 'landing-theme-toggle-light-icon', 'landing-theme-toggle-dark-icon');
+    setupThemeToggle('mobile-landing-theme-toggle', 'mobile-landing-theme-toggle-light-icon', 'mobile-landing-theme-toggle-dark-icon');
+</script>
+
+<div class="relative overflow-hidden bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 min-h-screen transition-colors duration-300">
     <!-- Background Decor -->
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-indigo-600/10 blur-[120px] rounded-full -z-10"></div>
     <div class="absolute bottom-0 right-0 w-96 h-96 bg-purple-600/5 blur-[100px] rounded-full -z-10"></div>
     
     <!-- Hero Section -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-32 text-center relative">
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-32 text-center relative">
         
-        <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold text-white tracking-tight mb-6 leading-[1.1]">
+        <h1 class="text-5xl md:text-7xl lg:text-6xl font-bold text-gray-900 dark:text-white tracking-tight mb-6 leading-[1.1]">
             Domina tus estudios
-            <span class="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400">
+            <span class="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400">
                 Sin esfuerzo.
             </span>
         </h1>
         
-        <p class="max-w-2xl mx-auto text-lg md:text-xl text-gray-400 mb-10 leading-relaxed">
+        <p class="max-w-2xl mx-auto text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-10 leading-relaxed">
             La plataforma diseñada para estudiantes que buscan excelencia. Organiza tus materias, tareas y horarios en un solo lugar con una interfaz intuitiva y potente.
         </p>
         
@@ -27,7 +154,7 @@
                 <span class="relative z-10">Comenzar Gratis</span>
                 <span class="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
             </button>
-            <a href="#features" class="w-full sm:w-auto px-10 py-4 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-2xl border border-white/10 hover:border-white/20 transition-all duration-300 text-lg backdrop-blur-sm">
+            <a href="#features" class="w-full sm:w-auto px-10 py-4 bg-gray-200/50 hover:bg-gray-200 dark:bg-white/5 dark:hover:bg-white/10 text-gray-900 dark:text-white font-semibold rounded-2xl border border-gray-300/50 dark:border-white/10 hover:border-gray-400/50 dark:hover:border-white/20 transition-all duration-300 text-lg backdrop-blur-sm">
                 Saber más →
             </a>
         </div>
@@ -35,62 +162,64 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 border-t border-gray-800/50">
+    <section id="features" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 border-t border-gray-200/50 dark:border-gray-800/50">
         <div class="text-center mb-16">
-            <span class="text-sm font-medium text-indigo-400 uppercase tracking-wider">Características</span>
-            <h2 class="text-3xl md:text-4xl font-bold text-white mt-3">Todo lo que necesitas para triunfar</h2>
-            <p class="text-gray-400 mt-3 max-w-xl mx-auto">Herramientas diseñadas para simplificar tu vida académica y potenciar tu rendimiento.</p>
+            <span class="text-sm font-medium text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">Características</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mt-3">Todo lo que necesitas para triunfar</h2>
+            <p class="text-gray-600 dark:text-gray-400 mt-3 max-w-xl mx-auto">Herramientas diseñadas para simplificar tu vida académica y potenciar tu rendimiento.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="group p-8 bg-gradient-to-br from-gray-900/50 to-gray-800/30 border border-gray-800/50 rounded-3xl hover:border-indigo-500/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-indigo-500/10">
-                <div class="w-14 h-14 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+            <div class="group p-8 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800/50 rounded-3xl hover:border-indigo-500/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-indigo-500/10">
+                <div class="w-14 h-14 bg-indigo-50 dark:bg-indigo-500/15 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                     </svg>
                 </div>
-                <h3 class="text-xl font-bold text-white mb-3">Gestión de Materias</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Mantén un control total de tus cursos, profesores y materiales de estudio en un solo lugar.</p>
-                <div class="mt-4 flex items-center text-indigo-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Gestión de Materias</h3>
+                <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Mantén un control total de tus cursos, profesores y materiales de estudio en un solo lugar.</p>
+                <div class="mt-4 flex items-center text-indigo-600 dark:text-indigo-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     Saber más <span class="ml-1">→</span>
                 </div>
             </div>
 
-            <div class="group p-8 bg-gradient-to-br from-gray-900/50 to-gray-800/30 border border-gray-800/50 rounded-3xl hover:border-purple-500/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-purple-500/10">
-                <div class="w-14 h-14 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <div class="group p-8 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800/50 rounded-3xl hover:border-purple-500/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-purple-500/10">
+                <div class="w-14 h-14 bg-purple-50 dark:bg-purple-500/15 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-purple-600 dark:text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                 </div>
-                <h3 class="text-xl font-bold text-white mb-3">Tareas y Plazos</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Nunca pierdas una entrega con nuestro sistema de recordatorios y seguimiento de estado.</p>
-                <div class="mt-4 flex items-center text-purple-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Tareas y Plazos</h3>
+                <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Nunca pierdas una entrega con nuestro sistema de recordatorios y seguimiento de estado.</p>
+                <div class="mt-4 flex items-center text-purple-600 dark:text-purple-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     Saber más <span class="ml-1">→</span>
                 </div>
             </div>
 
-            <div class="group p-8 bg-gradient-to-br from-gray-900/50 to-gray-800/30 border border-gray-800/50 rounded-3xl hover:border-emerald-500/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-emerald-500/10">
-                <div class="w-14 h-14 bg-gradient-to-br from-emerald-500/20 to-teal-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <div class="group p-8 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800/50 rounded-3xl hover:border-emerald-500/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-emerald-500/10">
+                <div class="w-14 h-14 bg-emerald-50 dark:bg-emerald-500/15 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-emerald-600 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                     </svg>
                 </div>
-                <h3 class="text-xl font-bold text-white mb-3">Seguimiento de Progreso</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Visualiza tu rendimiento académico y mantente motivado para alcanzar tus objetivos.</p>
-                <div class="mt-4 flex items-center text-emerald-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Seguimiento de Progreso</h3>
+                <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Visualiza tu rendimiento académico y mantente motivado para alcanzar tus objetivos.</p>
+                <div class="mt-4 flex items-center text-emerald-600 dark:text-emerald-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     Saber más <span class="ml-1">→</span>
                 </div>
             </div>
         </div>
 
         <!-- CTA Section -->
-        <div class="mt-20 text-center p-12 bg-gradient-to-br from-indigo-600/10 to-purple-600/10 border border-indigo-500/20 rounded-3xl">
-            <h3 class="text-2xl md:text-3xl font-bold text-white mb-4">¿Listo para transformar tu forma de estudiar?</h3>
-            <p class="text-gray-400 mb-6 max-w-lg mx-auto">Únete a miles de estudiantes que ya están organizando su éxito académico.</p>
-            <button onclick="openModal('register')" class="px-10 py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-2xl transition-all duration-300 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40">
+        <div class="mt-20 text-center p-12 bg-indigo-50 dark:bg-gradient-to-br dark:from-indigo-600/10 dark:to-purple-600/10 border border-indigo-100 dark:border-indigo-500/20 rounded-3xl">
+            <h3 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">¿Listo para transformar tu forma de estudiar?</h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-6 max-w-lg mx-auto">Únete a miles de estudiantes que ya están organizando su éxito académico.</p>
+            <button onclick="openModal('register')" class="px-10 py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-2xl transition-all duration-300 shadow-xl shadow-indigo-500/25 hover:shadow-indigo-500/40">
                 Comienza ahora — es gratis
             </button>
         </div>
     </section>
+
+    {% include 'components/footer.html' %}
 </div>
 {% endblock %}

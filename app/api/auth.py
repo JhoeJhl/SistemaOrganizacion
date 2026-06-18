@@ -23,6 +23,8 @@ def login():
             return redirect(url_for('main.inicio'))
         else:
             flash('Usuario o contraseña incorrectos', 'error')
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return render_template('auth/login.html'), 401
 
     # Si es método GET, mostramos la plantilla HTML
     return render_template('auth/login.html')
@@ -68,4 +70,4 @@ def register():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('auth.login'))
+    return redirect(url_for('main.landing'))

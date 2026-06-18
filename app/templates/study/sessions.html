@@ -8,10 +8,10 @@
     <div class="absolute top-0 right-0 w-96 h-96 bg-emerald-600/5 blur-[120px] rounded-full -z-10"></div>
     <div class="absolute bottom-0 left-0 w-80 h-80 bg-indigo-600/5 blur-[120px] rounded-full -z-10"></div>
 
-    <!-- Active Session Banner -->
     {% set active_session = sessions|selectattr('end_time', 'none')|first %}
     {% if active_session %}
-    <div class="relative mb-10 bg-gradient-to-br from-emerald-600/20 via-teal-600/10 to-emerald-600/5 border border-emerald-500/20 rounded-3xl p-6 md:p-8 shadow-2xl shadow-emerald-500/10 overflow-hidden group">
+    <div class="relative mb-10 bg-emerald-50 dark:bg-gradient-to-br dark:from-emerald-600/20 dark:via-teal-600/10 dark:to-emerald-600/5 border border-emerald-200 dark:border-emerald-500/20 rounded-3xl p-6 md:p-8 shadow-md dark:shadow-2xl shadow-emerald-500/5 dark:shadow-emerald-500/10 overflow-hidden group"
+         data-active-start="{{ active_session.start_time.isoformat() }}Z">
         <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 blur-[100px] rounded-full"></div>
         <div class="absolute bottom-0 left-0 w-48 h-48 bg-teal-500/10 blur-[100px] rounded-full"></div>
         
@@ -23,17 +23,17 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
-                    <span class="absolute -top-1 -right-1 w-4 h-4 bg-emerald-400 rounded-full border-2 border-gray-900 animate-ping"></span>
+                    <span class="absolute -top-1 -right-1 w-4 h-4 bg-emerald-400 rounded-full border-2 border-white dark:border-gray-900 animate-ping"></span>
                 </div>
                 <div>
-                    <h2 class="text-xl md:text-2xl font-bold text-white tracking-tight">Sesión en Curso</h2>
-                    <p class="text-emerald-400 font-medium">
-                        Estudiando: <span class="text-white font-bold">{{ active_session.subject.name }}</span>
+                    <h2 class="text-xl md:text-2xl font-bold text-emerald-900 dark:text-white tracking-tight">Sesión en Curso</h2>
+                    <p class="text-emerald-700 dark:text-emerald-400 font-medium">
+                        Estudiando: <span class="text-emerald-900 dark:text-white font-bold">{{ active_session.subject.name }}</span>
                     </p>
                     <div class="flex items-center gap-3 mt-1">
-                        <span class="text-xs text-gray-400">Iniciada a las {{ active_session.start_time.strftime('%H:%M') }}</span>
-                        <span class="inline-block w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span>
-                        <span class="text-xs text-emerald-400 font-medium">En progreso</span>
+                        <span class="text-xs text-emerald-600/80 dark:text-gray-400">Iniciada a las {{ active_session.start_time.strftime('%H:%M') }}</span>
+                        <span class="inline-block w-1.5 h-1.5 bg-emerald-500 dark:bg-emerald-400 rounded-full animate-pulse"></span>
+                        <span class="text-xs text-emerald-600 dark:text-emerald-400 font-medium" id="active-session-duration">En progreso</span>
                     </div>
                 </div>
             </div>
@@ -63,8 +63,8 @@
                     </svg>
                 </div>
                 <div>
-                    <h1 class="text-3xl md:text-4xl font-bold text-white tracking-tight">Registro de Estudio</h1>
-                    <p class="text-gray-400 text-sm">Controla el tiempo invertido en tu aprendizaje</p>
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white tracking-tight">Registro de Estudio</h1>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Controla el tiempo invertido en tu aprendizaje</p>
                 </div>
             </div>
         </div>
@@ -84,23 +84,23 @@
 
     <!-- Stats -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        <div class="bg-gray-900/50 border border-gray-800/50 rounded-2xl p-4 text-center hover:border-emerald-500/30 transition-all duration-300">
-            <div class="text-2xl font-bold text-white">{{ sessions|selectattr('end_time')|list|length }}</div>
+        <div class="bg-white dark:bg-gray-900/50 border border-gray-200 dark:border-gray-800/50 rounded-2xl p-4 text-center hover:border-emerald-500/30 transition-all duration-300 shadow-sm dark:shadow-none">
+            <div class="text-2xl font-bold text-gray-900 dark:text-white">{{ sessions|selectattr('end_time')|list|length }}</div>
             <div class="text-xs text-gray-500 font-medium uppercase tracking-wider">Sesiones Totales</div>
         </div>
-        <div class="bg-gray-900/50 border border-gray-800/50 rounded-2xl p-4 text-center hover:border-emerald-500/30 transition-all duration-300">
-            <div class="text-2xl font-bold text-emerald-400">
+        <div class="bg-white dark:bg-gray-900/50 border border-gray-200 dark:border-gray-800/50 rounded-2xl p-4 text-center hover:border-emerald-500/30 transition-all duration-300 shadow-sm dark:shadow-none">
+            <div class="text-2xl font-bold text-emerald-600 dark:text-emerald-400">
                 {% set total_minutes = sessions|selectattr('duration')|sum(attribute='duration') %}
                 {{ (total_minutes / 60)|round|int }}h
             </div>
             <div class="text-xs text-gray-500 font-medium uppercase tracking-wider">Tiempo Total</div>
         </div>
-        <div class="bg-gray-900/50 border border-gray-800/50 rounded-2xl p-4 text-center hover:border-indigo-500/30 transition-all duration-300">
-            <div class="text-2xl font-bold text-indigo-400">{{ subjects|length }}</div>
+        <div class="bg-white dark:bg-gray-900/50 border border-gray-200 dark:border-gray-800/50 rounded-2xl p-4 text-center hover:border-indigo-500/30 transition-all duration-300 shadow-sm dark:shadow-none">
+            <div class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">{{ subjects|length }}</div>
             <div class="text-xs text-gray-500 font-medium uppercase tracking-wider">Materias Activas</div>
         </div>
-        <div class="bg-gray-900/50 border border-gray-800/50 rounded-2xl p-4 text-center hover:border-amber-500/30 transition-all duration-300">
-            <div class="text-2xl font-bold text-amber-400">
+        <div class="bg-white dark:bg-gray-900/50 border border-gray-200 dark:border-gray-800/50 rounded-2xl p-4 text-center hover:border-amber-500/30 transition-all duration-300 shadow-sm dark:shadow-none">
+            <div class="text-2xl font-bold text-amber-600 dark:text-amber-400">
                 {% if sessions|selectattr('end_time')|list|length > 0 %}
                     {{ (total_minutes / sessions|selectattr('end_time')|list|length)|round|int }}
                 {% else %}
@@ -111,22 +111,25 @@
         </div>
     </div>
 
-    <!-- History Table -->
-    <div class="bg-gradient-to-br from-gray-900/80 to-gray-800/80 border border-gray-800/50 rounded-3xl overflow-hidden shadow-xl">
-        <div class="flex items-center justify-between p-6 border-b border-gray-800/50">
-            <h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider flex items-center gap-2">
-                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+    <!-- Main Content Grid (Table + Pomodoro) -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+        
+        <!-- Left: History Table -->
+        <div class="lg:col-span-2 bg-white dark:bg-gradient-to-br dark:from-gray-900/80 dark:to-gray-800/80 border border-gray-200 dark:border-gray-800/50 rounded-3xl overflow-hidden shadow-xl dark:shadow-2xl">
+        <div class="flex items-center justify-between p-6 border-b border-gray-100 dark:border-gray-800/50">
+            <h3 class="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 Historial de Sesiones
             </h3>
-            <span class="text-xs text-gray-500">{{ sessions|selectattr('end_time')|list|length }} registros</span>
+            <span class="text-xs text-gray-400 dark:text-gray-500">{{ sessions|selectattr('end_time')|list|length }} registros</span>
         </div>
         
         <div class="overflow-x-auto">
             <table class="w-full text-left">
                 <thead>
-                    <tr class="text-[10px] text-gray-500 font-bold uppercase tracking-wider border-b border-gray-800/50 bg-gray-950/30">
+                    <tr class="text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider border-b border-gray-200 dark:border-gray-800/50 bg-gray-50/50 dark:bg-gray-950/30">
                         <th class="px-6 py-4">Fecha</th>
                         <th class="px-6 py-4">Materia</th>
                         <th class="px-6 py-4 hidden md:table-cell">Tema</th>
@@ -135,96 +138,191 @@
                         <th class="px-6 py-4 text-center">Acciones</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-800/50">
+                <tbody class="divide-y divide-gray-200 dark:divide-gray-800/50">
+                    {% if active_session %}
+                    <tr class="bg-emerald-500/5 dark:bg-emerald-500/10 hover:bg-emerald-500/10 dark:hover:bg-emerald-500/20 transition-colors group"
+                        data-active-start="{{ active_session.start_time.isoformat() }}Z">
+                        <td class="px-6 py-4">
+                            <div class="text-sm text-emerald-600 dark:text-emerald-400 font-medium">Hoy</div>
+                            <div class="text-[10px] text-gray-500">En curso</div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="inline-block px-3 py-1 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold rounded-full border border-emerald-500/20">
+                                {{ active_session.subject.name }}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 hidden md:table-cell">
+                            {% if active_session.topic %}
+                            <span class="text-sm text-gray-700 dark:text-gray-300">{{ active_session.topic.title }}</span>
+                            {% else %}
+                            <span class="text-sm text-gray-400 dark:text-gray-600">—</span>
+                            {% endif %}
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="text-xs text-gray-500 dark:text-gray-400">
+                                {{ active_session.start_time.strftime('%H:%M') }}
+                                <span class="text-gray-400 dark:text-gray-600">→</span>
+                                <span class="live-end-time font-semibold text-emerald-600 dark:text-emerald-400 animate-pulse">--:--</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                             <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-300 text-xs font-bold rounded-lg border border-emerald-200 dark:border-emerald-700/50">
+                                <svg class="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400 animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span class="live-duration">0 min</span>
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <form action="{{ url_for('study.stop_session', id=active_session.id) }}" method="POST" class="inline-block">
+                                <button type="submit"                                         class="p-2 text-rose-600 hover:text-rose-500 hover:bg-rose-500/10 dark:hover:bg-rose-500/10 rounded-xl transition-all duration-200"
+                                        title="Finalizar Sesión">
+                                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endif %}
                     {% set completed_sessions = sessions|selectattr('end_time')|list %}
-                    {% if completed_sessions %}
+                    {% if completed_sessions or active_session %}
                         {% for session in completed_sessions|sort(attribute='start_time', reverse=true) %}
-                        <tr class="hover:bg-white/5 transition-colors group">
+                        <tr class="hover:bg-gray-50/50 dark:hover:bg-white/5 transition-colors group">
                             <td class="px-6 py-4">
-                                <div class="text-sm text-white font-medium">{{ session.start_time.strftime('%d %b') }}</div>
+                                <div class="text-sm text-gray-900 dark:text-white font-medium">{{ session.start_time.strftime('%d %b') }}</div>
                                 <div class="text-[10px] text-gray-500">{{ session.start_time.strftime('%Y') }}</div>
                             </td>
                             <td class="px-6 py-4">
-                                <span class="inline-block px-3 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-bold rounded-full border border-emerald-500/20">
+                                <span class="inline-block px-3 py-1 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold rounded-full border border-emerald-500/20">
                                     {{ session.subject.name }}
                                 </span>
                             </td>
                             <td class="px-6 py-4 hidden md:table-cell">
                                 {% if session.topic %}
-                                <span class="text-sm text-gray-300">{{ session.topic.title }}</span>
+                                <span class="text-sm text-gray-700 dark:text-gray-300">{{ session.topic.title }}</span>
                                 {% else %}
-                                <span class="text-sm text-gray-600">—</span>
+                                <span class="text-sm text-gray-400 dark:text-gray-600">—</span>
                                 {% endif %}
                             </td>
                             <td class="px-6 py-4">
-                                <div class="text-xs text-gray-400">
+                                <div class="text-xs text-gray-500 dark:text-gray-400">
                                     {{ session.start_time.strftime('%H:%M') }}
-                                    <span class="text-gray-600">→</span>
+                                    <span class="text-gray-400 dark:text-gray-600">→</span>
                                     {{ session.end_time.strftime('%H:%M') }}
                                 </div>
                             </td>
                             <td class="px-6 py-4">
-                                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-800/50 text-gray-300 text-xs font-bold rounded-lg border border-gray-700/50">
-                                    <svg class="w-3 h-3 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 dark:bg-gray-800/50 text-gray-700 dark:text-gray-300 text-xs font-bold rounded-lg border border-gray-200 dark:border-gray-700/50">
+                                    <svg class="w-3 h-3 text-emerald-500 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                     {{ session.duration }} min
                                 </span>
                             </td>
                             <td class="px-6 py-4 text-center">
-                                <form action="{{ url_for('study.delete_session', id=session.id) }}" method="POST" 
-                                      onsubmit="return confirm('¿Estás seguro de eliminar esta sesión?\n\nEsta acción no se puede deshacer.')">
-                                    <button type="submit" 
-                                            class="p-2 text-gray-600 hover:text-red-400 hover:bg-red-400/10 rounded-xl transition-all duration-200 opacity-0 group-hover:opacity-100">
-                                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                                        </svg>
-                                    </button>
-                                </form>
+                                <button type="button" 
+                                        onclick="showConfirmModal('¿Eliminar sesión?', '¿Estás seguro de eliminar esta sesión de estudio? Esta acción no se puede deshacer.', '{{ url_for('study.delete_session', id=session.id) }}')"
+                                        class="p-2 text-gray-600 hover:text-red-400 hover:bg-red-400/10 rounded-xl transition-all duration-200 opacity-0 group-hover:opacity-100">
+                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                    </svg>
+                                </button>
                             </td>
                         </tr>
                         {% endfor %}
                     {% else %}
-                        {% if not active_session %}
                         <tr>
                             <td colspan="6" class="px-6 py-16 text-center">
                                 <div class="flex flex-col items-center gap-3">
-                                    <div class="w-16 h-16 bg-gray-800/50 rounded-2xl flex items-center justify-center">
-                                        <svg class="w-8 h-8 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                    <div class="w-16 h-16 bg-gray-100 dark:bg-gray-800/50 rounded-2xl flex items-center justify-center">
+                                        <svg class="w-8 h-8 text-gray-400 dark:text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
                                     </div>
-                                    <p class="text-gray-500 font-medium">No hay registros de sesiones</p>
-                                    <p class="text-xs text-gray-600">Comienza tu primera sesión de estudio ahora</p>
-                                    {% if not active_session %}
+                                    <p class="text-gray-600 dark:text-gray-400 font-medium">No hay registros de sesiones</p>
+                                     <p class="text-xs text-gray-400 dark:text-gray-500">Comienza tu primera sesión de estudio ahora</p>
                                     <button onclick="openSessionModal()" 
-                                            class="mt-2 text-emerald-400 hover:text-emerald-300 text-sm font-medium transition-colors">
+                                            class="mt-2 text-emerald-500 hover:text-emerald-600 dark:text-emerald-400 dark:hover:text-emerald-300 text-sm font-medium transition-colors">
                                         Iniciar sesión →
                                     </button>
-                                    {% endif %}
                                 </div>
                             </td>
                         </tr>
-                        {% endif %}
                     {% endif %}
                 </tbody>
             </table>
         </div>
     </div>
+
+    <!-- Right: Pomodoro Timer -->
+    <div class="bg-white dark:bg-gradient-to-br dark:from-gray-900/80 dark:to-gray-800/80 border border-gray-200 dark:border-gray-800/50 rounded-3xl p-8 shadow-xl dark:shadow-2xl flex flex-col items-center">
+        <h3 class="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider flex items-center gap-2 mb-6 self-start">
+            <span class="text-lg">🍅</span> Método Pomodoro
+        </h3>
+        
+        <!-- Mode Selector Buttons -->
+        <div class="flex gap-1.5 p-1 bg-gray-100 dark:bg-gray-950/50 rounded-2xl w-full">
+            <button onclick="setPomoMode('work')" id="btn-mode-work" class="flex-1 text-[11px] font-bold py-2.5 rounded-xl transition-all duration-300 bg-rose-500 text-white shadow-md shadow-rose-500/20">
+                Estudio
+            </button>
+            <button onclick="setPomoMode('short')" id="btn-mode-short" class="flex-1 text-[11px] font-bold py-2.5 rounded-xl transition-all duration-300 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
+                Recreo
+            </button>
+            <button onclick="setPomoMode('long')" id="btn-mode-long" class="flex-1 text-[11px] font-bold py-2.5 rounded-xl transition-all duration-300 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
+                Largo
+            </button>
+        </div>
+        
+        <!-- Circular Progress Timer -->
+        <div class="relative w-48 h-48 my-8 flex items-center justify-center">
+            <svg class="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" stroke="currentColor" class="text-gray-250 dark:text-gray-800/60" stroke-width="5" fill="transparent" />
+                <circle id="pomo-ring" cx="50" cy="50" r="45" stroke="currentColor" class="text-rose-500 transition-all duration-300" stroke-width="5" stroke-linecap="round" fill="transparent" stroke-dasharray="283" stroke-dashoffset="0" />
+            </svg>
+            <div class="text-center z-10">
+                <span id="pomo-time" class="text-4xl font-black tracking-tight text-gray-900 dark:text-white">25:00</span>
+                <p id="pomo-label" class="text-[9px] font-extrabold text-gray-400 dark:text-gray-500 uppercase tracking-widest mt-1.5">Estudio</p>
+            </div>
+        </div>
+        
+        <!-- Control Buttons -->
+        <div class="flex gap-3 w-full">
+            <button onclick="togglePomo()" id="btn-pomo-toggle" class="flex-1 bg-rose-500 hover:bg-rose-600 text-white font-bold py-3.5 px-4 rounded-2xl transition-all duration-300 shadow-xl shadow-rose-500/25 hover:shadow-rose-500/40 active:scale-95 flex items-center justify-center gap-2">
+                <svg id="svg-play" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+                </svg>
+                <svg id="svg-pause" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" />
+                </svg>
+                <span id="txt-pomo-toggle">Comenzar</span>
+            </button>
+            
+            <button onclick="resetPomo()" class="bg-gray-100 hover:bg-gray-200 dark:bg-gray-800/50 dark:hover:bg-gray-700 text-gray-600 dark:text-white p-3.5 rounded-2xl transition-all duration-300 border border-gray-200 dark:border-gray-700/50 active:scale-95 flex items-center justify-center">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                </svg>
+            </button>
+        </div>
+        
+        <p id="pomo-tip" class="text-[10px] text-gray-500 dark:text-gray-500 text-center mt-5 leading-relaxed">
+            💡 Tip: Inicia un registro de sesión de estudio arriba para guardar tus horas efectivas.
+        </p>
+    </div>
 </div>
 
 <!-- Modal Nueva Sesión -->
 <div id="sessionModal" class="fixed inset-0 bg-gray-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
-    <div class="w-full max-w-lg bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl shadow-2xl border border-white/10 overflow-hidden animate-in zoom-in-95 duration-200">
+    <div class="w-full max-w-lg bg-white dark:bg-gradient-to-br dark:from-gray-900 dark:to-gray-800 rounded-3xl shadow-2xl border border-gray-200 dark:border-white/10 overflow-hidden animate-in zoom-in-95 duration-200 text-gray-900 dark:text-white">
         <div class="p-8 md:p-10">
             <div class="flex justify-between items-start mb-8">
                 <div>
-                    <h2 class="text-3xl font-bold text-white tracking-tight flex items-center gap-2">
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white tracking-tight flex items-center gap-2">
                         ⏱️ Iniciar Sesión
                     </h2>
-                    <p class="text-gray-400 mt-2 text-sm">¿Qué vas a estudiar ahora?</p>
+                    <p class="text-gray-500 dark:text-gray-400 mt-2 text-sm">¿Qué vas a estudiar ahora?</p>
                 </div>
-                <button onclick="closeSessionModal()" class="text-gray-500 hover:text-white transition-colors bg-white/5 hover:bg-white/10 p-2 rounded-xl">
+                <button onclick="closeSessionModal()" class="text-gray-500 hover:text-gray-700 dark:hover:text-white transition-colors bg-gray-100 hover:bg-gray-200 dark:bg-white/5 dark:hover:bg-white/10 p-2 rounded-xl">
                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -233,11 +331,11 @@
 
             <form action="{{ url_for('study.start_session') }}" method="POST" class="space-y-5">
                 <div>
-                    <label class="block text-sm font-medium text-gray-400 mb-2">
-                        Materia <span class="text-red-400">*</span>
+                    <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
+                        Materia <span class="text-red-500">*</span>
                     </label>
                     <select name="subject_id" id="sessionSubject" required onchange="loadTopics(this.value)"
-                            class="w-full px-5 py-4 bg-gray-950/50 border-2 border-gray-700/50 rounded-2xl text-white focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/20 transition-all duration-300">
+                            class="w-full px-5 py-4 bg-gray-50/50 dark:bg-gray-950/50 border-2 border-gray-200 dark:border-gray-700/50 rounded-2xl text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/20 transition-all duration-300">
                         <option value="">Selecciona una materia</option>
                         {% for subject in subjects %}
                         <option value="{{ subject.id }}">{{ subject.name }}</option>
@@ -246,12 +344,12 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-400 mb-2">Tema <span class="text-gray-500 text-xs">(Opcional)</span></label>
+                    <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Tema <span class="text-gray-400 dark:text-gray-500 text-xs">(Opcional)</span></label>
                     <select name="topic_id" id="sessionTopic"
-                            class="w-full px-5 py-4 bg-gray-950/50 border-2 border-gray-700/50 rounded-2xl text-white focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/20 transition-all duration-300">
+                            class="w-full px-5 py-4 bg-gray-50/50 dark:bg-gray-950/50 border-2 border-gray-200 dark:border-gray-700/50 rounded-2xl text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/20 transition-all duration-300">
                         <option value="">Primero selecciona una materia</option>
                     </select>
-                    <p class="mt-1.5 text-[10px] text-gray-500">Los temas te ayudan a organizar mejor tu estudio</p>
+                    <p class="mt-1.5 text-[10px] text-gray-400 dark:text-gray-500">Los temas te ayudan a organizar mejor tu estudio</p>
                 </div>
 
                 <button type="submit" 
@@ -322,6 +420,239 @@
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') closeSessionModal();
     });
+
+    // --- Persistent Pomodoro Timer Logic ---
+    if (typeof window.pomoTimeLeft === 'undefined') {
+        window.pomoTimeLeft = 25 * 60;
+        window.pomoDuration = 25 * 60;
+        window.pomoIsRunning = false;
+        window.pomoMode = 'work';
+        window.pomoInterval = null;
+    }
+
+    const pomoTimes = {
+        work: 25 * 60,
+        short: 5 * 60,
+        long: 15 * 60
+    };
+
+    function setPomoMode(mode) {
+        if (window.pomoIsRunning) {
+            togglePomo();
+        }
+        window.pomoMode = mode;
+        window.pomoDuration = pomoTimes[mode];
+        window.pomoTimeLeft = window.pomoDuration;
+        updatePomoUI();
+    }
+
+    function updatePomoUI() {
+        const modes = ['work', 'short', 'long'];
+        modes.forEach(m => {
+            const btn = document.getElementById('btn-mode-' + m);
+            if (!btn) return;
+            if (m === window.pomoMode) {
+                btn.className = `flex-1 text-[11px] font-bold py-2.5 rounded-xl transition-all duration-300 ${
+                    window.pomoMode === 'work' ? 'bg-rose-500 text-white shadow-md shadow-rose-500/20' : 
+                    window.pomoMode === 'short' ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/20' : 
+                    'bg-indigo-600 text-white shadow-md shadow-indigo-500/20'
+                }`;
+            } else {
+                btn.className = "flex-1 text-[11px] font-bold py-2.5 rounded-xl transition-all duration-300 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white";
+            }
+        });
+
+        const ring = document.getElementById('pomo-ring');
+        if (ring) {
+            ring.className = `transition-all duration-300 stroke-current ${
+                window.pomoMode === 'work' ? 'text-rose-500' : 
+                window.pomoMode === 'short' ? 'text-emerald-500' : 
+                'text-indigo-600'
+            }`;
+        }
+
+        const label = document.getElementById('pomo-label');
+        if (label) {
+            label.innerText = window.pomoMode === 'work' ? 'Estudio' : window.pomoMode === 'short' ? 'Recreo' : 'Largo';
+        }
+
+        const btnToggle = document.getElementById('btn-pomo-toggle');
+        const playSvg = document.getElementById('svg-play');
+        const pauseSvg = document.getElementById('svg-pause');
+        const txtToggle = document.getElementById('txt-pomo-toggle');
+
+        if (btnToggle && playSvg && pauseSvg && txtToggle) {
+            if (window.pomoIsRunning) {
+                playSvg.classList.add('hidden');
+                pauseSvg.classList.remove('hidden');
+                txtToggle.innerText = 'Pausar';
+                btnToggle.className = "flex-1 bg-gray-700 hover:bg-gray-800 text-white font-bold py-3.5 px-4 rounded-2xl transition-all duration-300 shadow-xl active:scale-95 flex items-center justify-center gap-2";
+            } else {
+                playSvg.classList.remove('hidden');
+                pauseSvg.classList.add('hidden');
+                txtToggle.innerText = 'Comenzar';
+                const baseColors = window.pomoMode === 'work' ? 'bg-rose-500 hover:bg-rose-600' : window.pomoMode === 'short' ? 'bg-emerald-500 hover:bg-emerald-600' : 'bg-indigo-600 hover:bg-indigo-700';
+                btnToggle.className = `flex-1 ${baseColors} text-white font-bold py-3.5 px-4 rounded-2xl transition-all duration-300 shadow-xl active:scale-95 flex items-center justify-center gap-2`;
+            }
+        }
+
+        updatePomoDisplay();
+    }
+
+    function updatePomoDisplay() {
+        const minutes = Math.floor(window.pomoTimeLeft / 60).toString().padStart(2, '0');
+        const seconds = (window.pomoTimeLeft % 60).toString().padStart(2, '0');
+        
+        const timeEl = document.getElementById('pomo-time');
+        if (timeEl) {
+            timeEl.innerText = `${minutes}:${seconds}`;
+        }
+
+        const ring = document.getElementById('pomo-ring');
+        if (ring) {
+            const offset = 283 - (window.pomoTimeLeft / window.pomoDuration) * 283;
+            ring.setAttribute('stroke-dashoffset', offset);
+        }
+
+        const originalTitle = "Sesiones de Estudio - Estudios.io";
+        if (window.pomoIsRunning) {
+            document.title = `[${minutes}:${seconds}] ${originalTitle}`;
+        } else {
+            document.title = originalTitle;
+        }
+    }
+
+    function togglePomo() {
+        window.pomoIsRunning = !window.pomoIsRunning;
+
+        if (window.pomoIsRunning) {
+            if (window.pomoInterval) {
+                clearInterval(window.pomoInterval);
+            }
+            window.pomoInterval = setInterval(() => {
+                if (window.pomoTimeLeft > 0) {
+                    window.pomoTimeLeft--;
+                    updatePomoDisplay();
+                } else {
+                    clearInterval(window.pomoInterval);
+                    window.pomoInterval = null;
+                    window.pomoIsRunning = false;
+                    playChime();
+                    alert(window.pomoMode === 'work' ? '¡Sesión de estudio terminada! Tómate un descanso.' : '¡Descanso terminado! Volvamos al estudio.');
+                    resetPomo();
+                }
+            }, 1000);
+        } else {
+            if (window.pomoInterval) {
+                clearInterval(window.pomoInterval);
+                window.pomoInterval = null;
+            }
+        }
+        updatePomoUI();
+    }
+
+    function resetPomo() {
+        if (window.pomoIsRunning) {
+            togglePomo();
+        }
+        window.pomoTimeLeft = window.pomoDuration;
+        updatePomoUI();
+    }
+
+    function playChime() {
+        try {
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const playNote = (freq, duration, delay) => {
+                setTimeout(() => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                    gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+                    osc.start(audioCtx.currentTime);
+                    osc.stop(audioCtx.currentTime + duration);
+                }, delay);
+            };
+
+            playNote(659.25, 0.4, 0);   // E5
+            playNote(783.99, 0.5, 150); // G5
+            playNote(1046.50, 0.8, 300); // C6
+        } catch (e) {
+            console.error("Synthesizer alert failed", e);
+        }
+    }
+
+    function initPomoTimer() {
+        if (window.pomoIsRunning && !window.pomoInterval) {
+            window.pomoInterval = setInterval(() => {
+                if (window.pomoTimeLeft > 0) {
+                    window.pomoTimeLeft--;
+                    updatePomoDisplay();
+                } else {
+                    clearInterval(window.pomoInterval);
+                    window.pomoInterval = null;
+                    window.pomoIsRunning = false;
+                    playChime();
+                    alert(window.pomoMode === 'work' ? '¡Sesión de estudio terminada! Tómate un descanso.' : '¡Descanso terminado! Volvamos al estudio.');
+                    resetPomo();
+                }
+            }, 1000);
+        }
+        updatePomoUI();
+    }
+
+    initPomoTimer();
+
+    // --- Dynamic Active Session Duration Ticking Logic ---
+    function updateActiveSessions() {
+        const activeElements = document.querySelectorAll('[data-active-start]');
+        if (activeElements.length === 0) return;
+
+        activeElements.forEach(el => {
+            const startStr = el.getAttribute('data-active-start');
+            if (!startStr) return;
+            const startTime = new Date(startStr);
+            const now = new Date();
+            const elapsedMs = now - startTime;
+
+            let elapsedSecs = Math.floor(elapsedMs / 1000);
+            if (elapsedSecs < 0) elapsedSecs = 0;
+
+            const elapsedMins = Math.floor(elapsedSecs / 60);
+            const secs = elapsedSecs % 60;
+            
+            // Format elapsed string
+            const durationStr = `${elapsedMins} min ${secs}s`;
+
+            // 1. Update duration span in the active session banner
+            const bannerDurationEl = el.querySelector('#active-session-duration');
+            if (bannerDurationEl) {
+                bannerDurationEl.innerText = `En progreso: ${durationStr}`;
+            }
+
+            // 2. Update live end time span in the table row to show current time
+            const liveEndTimeEl = el.querySelector('.live-end-time');
+            if (liveEndTimeEl) {
+                const hours = now.getHours().toString().padStart(2, '0');
+                const minutes = now.getMinutes().toString().padStart(2, '0');
+                const seconds = now.getSeconds().toString().padStart(2, '0');
+                liveEndTimeEl.innerText = `${hours}:${minutes}:${seconds}`;
+            }
+
+            // 3. Update live duration span in the table row
+            const liveDurationEl = el.querySelector('.live-duration');
+            if (liveDurationEl) {
+                liveDurationEl.innerText = durationStr;
+            }
+        });
+    }
+
+    // Run immediately and trigger interval
+    updateActiveSessions();
+    setInterval(updateActiveSessions, 1000);
 </script>
 
 <style>

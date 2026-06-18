@@ -14,9 +14,9 @@
         </a>
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
-                <span class="inline-block px-3 py-1 bg-indigo-500/10 text-indigo-400 text-[10px] font-bold uppercase tracking-widest rounded-full mb-3">{{ subject.category or 'General' }}</span>
-                <h1 class="text-4xl font-extrabold text-white tracking-tight">{{ subject.name }}</h1>
-                <p class="text-gray-400 mt-2">{{ subject.description or 'Gestión de temas de estudio.' }}</p>
+                <span class="inline-block px-3 py-1 bg-indigo-500/10 text-indigo-500 dark:text-indigo-400 text-[10px] font-bold uppercase tracking-widest rounded-full mb-3">{{ subject.category or 'General' }}</span>
+                <h1 class="text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">{{ subject.name }}</h1>
+                <p class="text-gray-500 dark:text-gray-400 mt-2">{{ subject.description or 'Gestión de temas de estudio.' }}</p>
             </div>
             <button onclick="openTopicModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-2xl font-bold transition-all shadow-xl shadow-indigo-500/25 flex items-center gap-2 active:scale-95 whitespace-nowrap">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -29,24 +29,24 @@
 
     <!-- Stats -->
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-4">
+        <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl p-4 shadow-sm dark:shadow-none">
             <p class="text-gray-500 text-xs font-bold uppercase tracking-wider mb-1">Total Temas</p>
-            <p class="text-2xl font-bold text-white">{{ topics|length }}</p>
+            <p class="text-2xl font-bold text-gray-900 dark:text-white">{{ topics|length }}</p>
         </div>
-        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-4">
-            <p class="text-emerald-500/80 text-xs font-bold uppercase tracking-wider mb-1">Completados</p>
-            <p class="text-2xl font-bold text-white">{{ topics|selectattr('is_completed', 'equalto', true)|list|length }}</p>
+        <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl p-4 shadow-sm dark:shadow-none">
+            <p class="text-emerald-600 dark:text-emerald-500/80 text-xs font-bold uppercase tracking-wider mb-1">Completados</p>
+            <p id="stats-completed" class="text-2xl font-bold text-gray-900 dark:text-white">{{ topics|selectattr('is_completed', 'equalto', true)|list|length }}</p>
         </div>
-        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-4">
-            <p class="text-indigo-400 text-xs font-bold uppercase tracking-wider mb-1">Progreso</p>
+        <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl p-4 shadow-sm dark:shadow-none">
+            <p class="text-indigo-600 dark:text-indigo-400 text-xs font-bold uppercase tracking-wider mb-1">Progreso</p>
             <div class="flex items-center gap-3 mt-1">
-                <div class="flex-1 h-2 bg-gray-800 rounded-full overflow-hidden">
+                <div class="flex-1 h-2 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
                     {% set total = topics|length %}
                     {% set completed = topics|selectattr('is_completed', 'equalto', true)|list|length %}
                     {% set percent = (completed / total * 100)|round|int if total > 0 else 0 %}
-                    <div class="h-full bg-indigo-500 transition-all duration-500" style="width: {{ percent }}%"></div>
+                    <div id="stats-progress-bar" class="h-full bg-indigo-500 transition-all duration-500" style="width: {{ percent }}%"></div>
                 </div>
-                <span class="text-sm font-bold text-white">{{ percent }}%</span>
+                <span id="stats-percent" class="text-sm font-bold text-gray-900 dark:text-white">{{ percent }}%</span>
             </div>
         </div>
     </div>
@@ -54,35 +54,33 @@
     <!-- Topics List -->
     <div class="space-y-3">
         {% if not topics %}
-        <div class="bg-gray-900/50 border-2 border-dashed border-gray-800 rounded-3xl p-12 text-center">
+        <div class="bg-white dark:bg-gray-900/50 border-2 border-dashed border-gray-200 dark:border-gray-800 rounded-3xl p-12 text-center shadow-sm dark:shadow-none">
             <p class="text-gray-500">No hay temas registrados para esta materia.</p>
         </div>
         {% else %}
             {% for topic in topics %}
-            <div class="group flex items-center gap-4 bg-gray-900 border border-gray-800 rounded-2xl p-4 hover:border-gray-700 transition-all">
+            <div class="group flex items-center gap-4 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl p-4 hover:border-indigo-500/40 dark:hover:border-gray-700 transition-all shadow-sm dark:shadow-none">
                 <button onclick="toggleTopic('{{ topic.id }}', this)" class="flex-shrink-0 w-8 h-8 rounded-full border-2 transition-all flex items-center justify-center
                     {% if topic.is_completed %}
                         bg-emerald-500 border-emerald-500 text-white
                     {% else %}
-                        border-gray-700 hover:border-indigo-500 text-transparent
+                        border-gray-300 dark:border-gray-700 hover:border-indigo-500 text-transparent
                     {% endif %}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                     </svg>
                 </button>
                 <div class="flex-grow">
-                    <h3 class="font-bold transition-all {% if topic.is_completed %}text-gray-500 line-through{% else %}text-white{% endif %}">{{ topic.title }}</h3>
+                    <h3 class="font-bold transition-all {% if topic.is_completed %}text-gray-400 line-through{% else %}text-gray-900 dark:text-white{% endif %}">{{ topic.title }}</h3>
                     {% if topic.description %}
                     <p class="text-xs text-gray-500 mt-0.5">{{ topic.description }}</p>
                     {% endif %}
                 </div>
-                <form action="{{ url_for('study.delete_topic', id=topic.id) }}" method="POST" onsubmit="return confirm('¿Eliminar este tema?')">
-                    <button type="submit" class="p-2 text-gray-600 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-all">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
-                        </svg>
-                    </button>
-                </form>
+                <button type="button" onclick="showConfirmModal('¿Eliminar tema?', '¿Estás seguro de eliminar el tema &quot;{{ topic.title|e }}&quot;? Esta acción no se puede deshacer.', '{{ url_for('study.delete_topic', id=topic.id) }}')" class="p-2 text-gray-400 hover:text-red-500 dark:text-gray-600 dark:hover:text-red-400 opacity-0 group-hover:opacity-100 transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                    </svg>
+                </button>
             </div>
             {% endfor %}
         {% endif %}
@@ -91,14 +89,14 @@
 
 <!-- Modal Tema -->
 <div id="topicModal" class="fixed inset-0 bg-gray-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
-    <div class="w-full max-w-lg bg-gray-900 rounded-3xl shadow-2xl border border-white/10 overflow-hidden animate-in zoom-in-95 duration-200">
+    <div class="w-full max-w-lg bg-white dark:bg-gradient-to-br dark:from-gray-900 dark:to-gray-800 rounded-3xl shadow-2xl border border-gray-200 dark:border-white/10 overflow-hidden animate-in zoom-in-95 duration-200 text-gray-900 dark:text-white">
         <div class="p-8 md:p-10">
             <div class="flex justify-between items-start mb-8">
                 <div>
-                    <h2 class="text-3xl font-bold text-white tracking-tight">Nuevo Tema</h2>
-                    <p class="text-gray-400 mt-2 text-sm">Divide tu materia en partes manejables.</p>
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">Nuevo Tema</h2>
+                    <p class="text-gray-500 dark:text-gray-400 mt-2 text-sm">Divide tu materia en partes manejables.</p>
                 </div>
-                <button onclick="closeTopicModal()" class="text-gray-500 hover:text-white transition-colors bg-white/5 p-2 rounded-xl">
+                <button onclick="closeTopicModal()" class="text-gray-500 hover:text-gray-700 dark:hover:text-white transition-colors bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 p-2 rounded-xl">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -108,15 +106,15 @@
             <form action="{{ url_for('study.create_topic') }}" method="POST" class="space-y-6">
                 <input type="hidden" name="subject_id" value="{{ subject.id }}">
                 <div>
-                    <label class="block text-sm font-medium text-gray-400 mb-2">Título del Tema</label>
+                    <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Título del Tema</label>
                     <input type="text" name="title" required placeholder="ej: Introducción a Flask"
-                        class="w-full px-5 py-4 bg-gray-950 border-2 border-gray-800 rounded-2xl text-white placeholder-gray-600 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 transition-all">
+                        class="w-full px-5 py-4 bg-gray-50/50 dark:bg-gray-950 border-2 border-gray-200 dark:border-gray-800 rounded-2xl text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 transition-all">
                 </div>
                 
                 <div>
-                    <label class="block text-sm font-medium text-gray-400 mb-2">Nota corta (Opcional)</label>
+                    <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Nota corta (Opcional)</label>
                     <input type="text" name="description" placeholder="ej: Conceptos básicos y estructura"
-                        class="w-full px-5 py-4 bg-gray-950 border-2 border-gray-800 rounded-2xl text-white placeholder-gray-600 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 transition-all">
+                        class="w-full px-5 py-4 bg-gray-50/50 dark:bg-gray-950 border-2 border-gray-200 dark:border-gray-800 rounded-2xl text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 transition-all">
                 </div>
 
                 <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-4 rounded-2xl transition-all shadow-xl shadow-indigo-500/25 active:scale-95">
@@ -152,21 +150,21 @@
             if (data.success) {
                 // Actualizar estado visual del botón
                 if (data.is_completed) {
-                    btn.classList.remove('border-gray-700', 'hover:border-indigo-500', 'text-transparent');
+                    btn.classList.remove('border-gray-300', 'border-gray-700', 'hover:border-indigo-500', 'text-transparent');
                     btn.classList.add('bg-emerald-500', 'border-emerald-500', 'text-white');
                 } else {
-                    btn.classList.add('border-gray-700', 'hover:border-indigo-500', 'text-transparent');
+                    btn.classList.add('border-gray-300', 'dark:border-gray-700', 'hover:border-indigo-500', 'text-transparent');
                     btn.classList.remove('bg-emerald-500', 'border-emerald-500', 'text-white');
                 }
 
                 // Actualizar estilo del texto
                 const title = btn.nextElementSibling.querySelector('h3');
                 if (data.is_completed) {
-                    title.classList.add('text-gray-500', 'line-through');
-                    title.classList.remove('text-white');
+                    title.classList.add('text-gray-400', 'line-through');
+                    title.classList.remove('text-gray-900', 'dark:text-white');
                 } else {
-                    title.classList.remove('text-gray-500', 'line-through');
-                    title.classList.add('text-white');
+                    title.classList.remove('text-gray-400', 'line-through');
+                    title.classList.add('text-gray-900', 'dark:text-white');
                 }
 
                 // Actualizar estadísticas y barra de progreso de forma dinámica
@@ -184,18 +182,27 @@
         const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
 
         // Actualizar números
-        document.querySelector('.text-emerald-500\\/80 + p').innerText = completed;
-        document.querySelector('.text-indigo-400 + div + span').innerText = percent + '%';
+        const completedEl = document.getElementById('stats-completed');
+        if (completedEl) {
+            completedEl.innerText = completed;
+        }
+
+        const percentEl = document.getElementById('stats-percent');
+        if (percentEl) {
+            percentEl.innerText = percent + '%';
+        }
         
         // Actualizar barra
-        const progressBar = document.querySelector('.bg-indigo-500');
-        progressBar.style.width = percent + '%';
-        
-        // Animación de pulso al llegar al 100%
-        if (percent === 100) {
-            progressBar.classList.add('animate-pulse');
-        } else {
-            progressBar.classList.remove('animate-pulse');
+        const progressBar = document.getElementById('stats-progress-bar');
+        if (progressBar) {
+            progressBar.style.width = percent + '%';
+            
+            // Animación de pulso al llegar al 100%
+            if (percent === 100) {
+                progressBar.classList.add('animate-pulse');
+            } else {
+                progressBar.classList.remove('animate-pulse');
+            }
         }
     }
 

@@ -1,8 +1,8 @@
 {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
-        <div class="fixed top-20 right-4 z-50 space-y-2 max-w-sm w-full">
+        <div id="flash-alerts-container" class="fixed top-24 left-1/2 -translate-x-1/2 z-50 space-y-2 max-w-sm w-full px-4 flex flex-col items-center">
             {% for category, message in messages %}
-                <div class="p-4 rounded-xl border flex items-start gap-3 shadow-2xl animate-in slide-in-from-right duration-300 
+                <div class="p-4 rounded-xl border flex items-start gap-3 shadow-2xl animate-in fade-in zoom-in-95 duration-300 w-full
                     {% if category == 'error' %}
                         bg-red-500/10 border-red-500/50 text-red-400
                     {% elif category == 'success' %}
@@ -10,7 +10,7 @@
                     {% else %}
                         bg-blue-500/10 border-blue-500/50 text-blue-400
                     {% endif %}">
-                    <div class="flex-grow text-sm font-medium">
+                    <div class="flex-grow text-center text-sm font-medium">
                         {{ message }}
                     </div>
                     <button onclick="this.parentElement.remove()" class="text-current opacity-50 hover:opacity-100 transition-opacity">
@@ -21,5 +21,17 @@
                 </div>
             {% endfor %}
         </div>
+        
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const alerts = document.querySelectorAll('#flash-alerts-container > div');
+                alerts.forEach(alert => {
+                    setTimeout(() => {
+                        alert.classList.add('animate-out', 'fade-out', 'zoom-out-95', 'duration-300');
+                        setTimeout(() => alert.remove(), 300);
+                    }, 2000);
+                });
+            });
+        </script>
     {% endif %}
 {% endwith %}

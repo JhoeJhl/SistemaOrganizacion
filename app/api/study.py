@@ -289,17 +289,27 @@ def get_events():
     event_list = []
     for e in events:
         event_list.append({
+            'id': e.id,
             'title': f"[{e.event_type.upper()}] {e.title}",
             'start': e.start_date.isoformat(),
             'end': e.end_date.isoformat() if e.end_date else None,
-            'color': '#6366f1' if e.event_type == 'examen' else '#14b8a6'
+            'color': '#6366f1' if e.event_type == 'examen' else '#14b8a6',
+            'event_type': e.event_type,
+            'subject': e.subject.name if e.subject else 'Sin materia',
+            'description': e.description or 'Sin descripción',
+            'is_task': False
         })
     for t in tasks:
         if t.due_date:
             event_list.append({
+                'id': t.id,
                 'title': f"📋 {t.title}",
                 'start': t.due_date.isoformat(),
-                'color': '#f59e0b' if t.status != 'completed' else '#10b981'
+                'color': '#f59e0b' if t.status != 'completed' else '#10b981',
+                'event_type': 'entrega',
+                'subject': t.subject.name if t.subject else 'Sin materia',
+                'description': t.description or 'Sin descripción',
+                'is_task': True
             })
     return jsonify(event_list)
 
@@ -313,6 +323,18 @@ def create_event():
     db.session.add(new_event)
     db.session.commit()
     flash('Evento de calendario creado', 'success')
+    return redirect(url_for('study.view_calendar'))
+
+@study_bp.route('/events/delete/<int:id>', methods=['POST'])
+@login_required
+def delete_event(id):
+    event = Event.query.get_or_404(id)
+    if event.user_id != current_user.id:
+        flash('No autorizado', 'error')
+        return redirect(url_for('study.view_calendar'))
+    db.session.delete(event)
+    db.session.commit()
+    flash('Evento eliminado con éxito', 'success')
     return redirect(url_for('study.view_calendar'))
 
 # --- Analíticas ---

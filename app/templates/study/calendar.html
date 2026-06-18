@@ -18,8 +18,8 @@
                     </svg>
                 </div>
                 <div>
-                    <h1 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight">Calendario Académico</h1>
-                    <p class="text-gray-400 text-sm">Exámenes, entregas y eventos importantes</p>
+                    <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">Calendario Académico</h1>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Exámenes, entregas y eventos importantes</p>
                 </div>
             </div>
         </div>
@@ -37,61 +37,61 @@
 
     <!-- Stats -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        <div class="bg-gray-900/50 border border-gray-800/50 rounded-2xl p-4 text-center hover:border-rose-500/30 transition-all duration-300">
-            <div class="text-2xl font-bold text-white">{{ events|length }}</div>
+        <div class="bg-white dark:bg-gray-900/50 border border-gray-200 dark:border-gray-800/50 rounded-2xl p-4 text-center hover:border-rose-500/30 transition-all duration-300 shadow-sm dark:shadow-none">
+            <div class="text-2xl font-bold text-gray-900 dark:text-white">{{ events|length }}</div>
             <div class="text-xs text-gray-500 font-medium uppercase tracking-wider">Total Eventos</div>
         </div>
-        <div class="bg-gray-900/50 border border-gray-800/50 rounded-2xl p-4 text-center hover:border-rose-500/30 transition-all duration-300">
-            <div class="text-2xl font-bold text-rose-400">{{ events|selectattr('event_type', 'equalto', 'examen')|list|length }}</div>
+        <div class="bg-white dark:bg-gray-900/50 border border-gray-200 dark:border-gray-800/50 rounded-2xl p-4 text-center hover:border-rose-500/30 transition-all duration-300 shadow-sm dark:shadow-none">
+            <div class="text-2xl font-bold text-rose-500 dark:text-rose-400">{{ events|selectattr('event_type', 'equalto', 'examen')|list|length }}</div>
             <div class="text-xs text-gray-500 font-medium uppercase tracking-wider">Exámenes</div>
         </div>
-        <div class="bg-gray-900/50 border border-gray-800/50 rounded-2xl p-4 text-center hover:border-amber-500/30 transition-all duration-300">
-            <div class="text-2xl font-bold text-amber-400">{{ events|selectattr('event_type', 'equalto', 'entrega')|list|length }}</div>
+        <div class="bg-white dark:bg-gray-900/50 border border-gray-200 dark:border-gray-800/50 rounded-2xl p-4 text-center hover:border-amber-500/30 transition-all duration-300 shadow-sm dark:shadow-none">
+            <div class="text-2xl font-bold text-amber-500 dark:text-amber-400">{{ events|selectattr('event_type', 'equalto', 'entrega')|list|length }}</div>
             <div class="text-xs text-gray-500 font-medium uppercase tracking-wider">Entregas</div>
         </div>
-        <div class="bg-gray-900/50 border border-gray-800/50 rounded-2xl p-4 text-center hover:border-emerald-500/30 transition-all duration-300">
-            <div class="text-2xl font-bold text-emerald-400">{{ events|selectattr('event_type', 'equalto', 'practica')|list|length }}</div>
+        <div class="bg-white dark:bg-gray-900/50 border border-gray-200 dark:border-gray-800/50 rounded-2xl p-4 text-center hover:border-emerald-500/30 transition-all duration-300 shadow-sm dark:shadow-none">
+            <div class="text-2xl font-bold text-emerald-500 dark:text-emerald-400">{{ events|selectattr('event_type', 'equalto', 'practica')|list|length }}</div>
             <div class="text-xs text-gray-500 font-medium uppercase tracking-wider">Prácticas</div>
         </div>
     </div>
 
     <!-- Calendar Container -->
-    <div class="bg-gradient-to-br from-gray-900/80 to-gray-800/80 border border-gray-800/50 rounded-3xl p-4 md:p-6 shadow-2xl overflow-hidden">
-        <div id="calendar" class="text-white"></div>
+    <div class="bg-white dark:bg-gradient-to-br dark:from-gray-900/80 dark:to-gray-800/80 border border-gray-200 dark:border-gray-800/50 rounded-3xl p-4 md:p-6 shadow-xl dark:shadow-2xl overflow-hidden">
+        <div id="calendar"></div>
     </div>
 
     <!-- Legend -->
-    <div class="mt-6 flex flex-wrap items-center justify-center gap-4 p-4 bg-gray-900/30 border border-gray-800/50 rounded-2xl">
+    <div class="mt-6 flex flex-wrap items-center justify-center gap-4 p-4 bg-white dark:bg-gray-900/30 border border-gray-200 dark:border-gray-800/50 rounded-2xl shadow-sm dark:shadow-none">
         <span class="text-xs text-gray-500 font-medium uppercase tracking-wider mr-2">Leyenda:</span>
         <div class="flex items-center gap-1.5">
             <span class="inline-block w-3 h-3 rounded-full bg-rose-500"></span>
-            <span class="text-xs text-gray-400">Examen</span>
+            <span class="text-xs text-gray-600 dark:text-gray-400">Examen</span>
         </div>
         <div class="flex items-center gap-1.5">
             <span class="inline-block w-3 h-3 rounded-full bg-amber-500"></span>
-            <span class="text-xs text-gray-400">Entrega</span>
+            <span class="text-xs text-gray-600 dark:text-gray-400">Entrega</span>
         </div>
         <div class="flex items-center gap-1.5">
             <span class="inline-block w-3 h-3 rounded-full bg-emerald-500"></span>
-            <span class="text-xs text-gray-400">Práctica</span>
+            <span class="text-xs text-gray-600 dark:text-gray-400">Práctica</span>
         </div>
         <div class="flex items-center gap-1.5">
             <span class="inline-block w-3 h-3 rounded-full bg-indigo-500"></span>
-            <span class="text-xs text-gray-400">Otro</span>
+            <span class="text-xs text-gray-600 dark:text-gray-400">Otro</span>
         </div>
     </div>
 </div>
 
 <!-- Modal Evento -->
 <div id="eventModal" class="fixed inset-0 bg-gray-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
-    <div class="w-full max-w-lg bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl shadow-2xl border border-white/10 overflow-hidden animate-in zoom-in-95 duration-200">
+    <div class="w-full max-w-lg bg-white dark:bg-gradient-to-br dark:from-gray-900 dark:to-gray-800 rounded-3xl shadow-2xl border border-gray-200 dark:border-white/10 overflow-hidden animate-in zoom-in-95 duration-200 text-gray-900 dark:text-white">
         <div class="p-8 md:p-10">
             <div class="flex justify-between items-start mb-8">
                 <div>
-                    <h2 class="text-3xl font-bold text-white tracking-tight">📅 Nuevo Evento</h2>
-                    <p class="text-gray-400 mt-2 text-sm">Registra un evento académico importante</p>
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">📅 Nuevo Evento</h2>
+                    <p class="text-gray-500 dark:text-gray-400 mt-2 text-sm">Registra un evento académico importante</p>
                 </div>
-                <button onclick="closeEventModal()" class="text-gray-500 hover:text-white transition-colors bg-white/5 hover:bg-white/10 p-2 rounded-xl">
+                <button onclick="closeEventModal()" class="text-gray-500 hover:text-gray-700 dark:hover:text-white transition-colors bg-gray-100 dark:bg-white/5 p-2 rounded-xl">
                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -100,21 +100,21 @@
 
             <form action="{{ url_for('study.create_event') }}" method="POST" class="space-y-5">
                 <div>
-                    <label class="block text-sm font-medium text-gray-400 mb-2">
-                        Título del Evento <span class="text-red-400">*</span>
+                    <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
+                        Título del Evento <span class="text-red-500">*</span>
                     </label>
                     <input type="text" name="title" required 
                            placeholder="ej: Examen Final de Programación"
-                           class="w-full px-5 py-4 bg-gray-950/50 border-2 border-gray-700/50 rounded-2xl text-white placeholder-gray-600 focus:outline-none focus:border-rose-500 focus:ring-4 focus:ring-rose-500/20 transition-all duration-300">
+                           class="w-full px-5 py-4 bg-gray-50/50 dark:bg-gray-950/50 border-2 border-gray-200 dark:border-gray-700/50 rounded-2xl text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:border-rose-500 focus:ring-4 focus:ring-rose-500/20 transition-all duration-300">
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-400 mb-2">
-                            Tipo <span class="text-red-400">*</span>
+                        <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
+                            Tipo <span class="text-red-500">*</span>
                         </label>
                         <select name="event_type" required 
-                                class="w-full px-5 py-4 bg-gray-950/50 border-2 border-gray-700/50 rounded-2xl text-white focus:outline-none focus:border-rose-500 focus:ring-4 focus:ring-rose-500/20 transition-all duration-300">
+                                class="w-full px-5 py-4 bg-gray-50/50 dark:bg-gray-950/50 border-2 border-gray-200 dark:border-gray-700/50 rounded-2xl text-gray-900 dark:text-white focus:outline-none focus:border-rose-500 focus:ring-4 focus:ring-rose-500/20 transition-all duration-300">
                             <option value="examen">📝 Examen</option>
                             <option value="entrega">📤 Entrega</option>
                             <option value="practica">💻 Práctica</option>
@@ -122,9 +122,9 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-400 mb-2">Materia</label>
+                        <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Materia</label>
                         <select name="subject_id" 
-                                class="w-full px-5 py-4 bg-gray-950/50 border-2 border-gray-700/50 rounded-2xl text-white focus:outline-none focus:border-rose-500 focus:ring-4 focus:ring-rose-500/20 transition-all duration-300">
+                                class="w-full px-5 py-4 bg-gray-50/50 dark:bg-gray-950/50 border-2 border-gray-200 dark:border-gray-700/50 rounded-2xl text-gray-900 dark:text-white focus:outline-none focus:border-rose-500 focus:ring-4 focus:ring-rose-500/20 transition-all duration-300">
                             <option value="">Sin materia</option>
                             {% for s in subjects %}
                             <option value="{{ s.id }}">{{ s.name }}</option>
@@ -134,23 +134,23 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-400 mb-2">
-                        Fecha y Hora <span class="text-red-400">*</span>
+                    <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
+                        Fecha y Hora <span class="text-red-500">*</span>
                     </label>
                     <input type="datetime-local" name="start_date" required 
-                           class="w-full px-5 py-4 bg-gray-950/50 border-2 border-gray-700/50 rounded-2xl text-white focus:outline-none focus:border-rose-500 focus:ring-4 focus:ring-rose-500/20 transition-all duration-300">
+                           class="w-full px-5 py-4 bg-gray-50/50 dark:bg-gray-950/50 border-2 border-gray-200 dark:border-gray-700/50 rounded-2xl text-gray-900 dark:text-white focus:outline-none focus:border-rose-500 focus:ring-4 focus:ring-rose-500/20 transition-all duration-300">
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-400 mb-2">Descripción <span class="text-gray-500 text-xs">(Opcional)</span></label>
+                    <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Descripción <span class="text-gray-400 dark:text-gray-500 text-xs">(Opcional)</span></label>
                     <textarea name="description" rows="2" 
-                              placeholder="Detalles adicionales del evento..."
-                              class="w-full px-5 py-4 bg-gray-950/50 border-2 border-gray-700/50 rounded-2xl text-white placeholder-gray-600 focus:outline-none focus:border-rose-500 focus:ring-4 focus:ring-rose-500/20 transition-all duration-300 resize-none"></textarea>
+                               placeholder="Detalles adicionales del evento..."
+                               class="w-full px-5 py-4 bg-gray-50/50 dark:bg-gray-950/50 border-2 border-gray-200 dark:border-gray-700/50 rounded-2xl text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:border-rose-500 focus:ring-4 focus:ring-rose-500/20 transition-all duration-300 resize-none"></textarea>
                 </div>
 
                 <div class="flex gap-3 mt-2">
                     <button type="button" onclick="closeEventModal()" 
-                            class="flex-1 bg-gray-800/50 hover:bg-gray-700/50 text-white font-bold py-4 rounded-2xl transition-all duration-300 border border-gray-700/50">
+                            class="flex-1 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800/50 dark:hover:bg-gray-700 text-gray-700 dark:text-white font-bold py-4 rounded-2xl transition-all duration-300 border border-gray-200 dark:border-gray-700/50">
                         Cancelar
                     </button>
                     <button type="submit" 
@@ -169,14 +169,77 @@
     </div>
 </div>
 
-<!-- FullCalendar CDN -->
-<link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/es.js"></script>
+<!-- Modal Detalle Evento -->
+<div id="eventDetailsModal" class="fixed inset-0 bg-gray-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
+    <div class="w-full max-w-md bg-white dark:bg-gradient-to-br dark:from-gray-900 dark:to-gray-800 rounded-3xl shadow-2xl border border-gray-200 dark:border-white/10 overflow-hidden animate-in zoom-in-95 duration-200 text-gray-900 dark:text-white">
+        <div class="p-8 md:p-10">
+            <div class="flex justify-between items-start mb-6">
+                <div>
+                    <span id="detailEventEmoji" class="text-3xl">📅</span>
+                    <h2 id="detailEventTitle" class="text-2xl font-bold text-gray-900 dark:text-white tracking-tight mt-2">Detalles del Evento</h2>
+                </div>
+                <button onclick="closeDetailsModal()" class="text-gray-500 hover:text-gray-700 dark:hover:text-white transition-colors bg-gray-100 dark:bg-white/5 p-2 rounded-xl">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="space-y-4 text-sm text-gray-600 dark:text-gray-300">
+                <div class="flex items-center gap-3 p-3 bg-gray-50/50 dark:bg-gray-950/40 rounded-xl border border-gray-200 dark:border-gray-800/30">
+                    <div class="text-gray-400 dark:text-gray-500">📅</div>
+                    <div>
+                        <p class="text-xs text-gray-500 font-bold uppercase">Fecha y Hora</p>
+                        <p id="detailEventDate" class="text-gray-900 dark:text-white font-medium"></p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex items-center gap-3 p-3 bg-gray-50/50 dark:bg-gray-950/40 rounded-xl border border-gray-200 dark:border-gray-800/30">
+                        <div class="text-gray-400 dark:text-gray-500">📚</div>
+                        <div>
+                            <p class="text-xs text-gray-500 font-bold uppercase">Materia</p>
+                            <p id="detailEventSubject" class="text-gray-900 dark:text-white font-medium truncate"></p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-3 p-3 bg-gray-50/50 dark:bg-gray-950/40 rounded-xl border border-gray-200 dark:border-gray-800/30">
+                        <div class="text-gray-400 dark:text-gray-500">📋</div>
+                        <div>
+                            <p class="text-xs text-gray-500 font-bold uppercase">Tipo</p>
+                            <p id="detailEventType" class="text-gray-900 dark:text-white font-medium"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-3 bg-gray-50/50 dark:bg-gray-950/40 rounded-xl border border-gray-200 dark:border-gray-800/30">
+                    <p class="text-xs text-gray-500 font-bold uppercase mb-1">Descripción</p>
+                    <p id="detailEventDescription" class="text-gray-800 dark:text-gray-200 leading-relaxed max-h-24 overflow-y-auto"></p>
+                </div>
+            </div>
+
+            <div class="flex gap-3 mt-8">
+                <button onclick="closeDetailsModal()" class="flex-1 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800/50 dark:hover:bg-gray-700 text-gray-700 dark:text-white font-bold py-3.5 rounded-2xl border border-gray-200 dark:border-gray-700/50">
+                    Cerrar
+                </button>
+                <form id="deleteEventForm" action="" method="POST" class="flex-1">
+                    <button type="button" 
+                            onclick="closeDetailsModal(); showConfirmModal('¿Eliminar evento?', '¿Estás seguro de que deseas eliminar este evento del calendario? Esta acción no se puede deshacer.', document.getElementById('deleteEventForm').action)"
+                            class="w-full bg-red-500/10 hover:bg-red-600 border border-red-500/50 hover:border-red-600 text-red-500 hover:text-white font-bold py-3.5 rounded-2xl transition-all">
+                        Eliminar Evento
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    function initCalendar() {
         var calendarEl = document.getElementById('calendar');
+        if (!calendarEl) return;
+        
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
             locale: 'es',
@@ -191,9 +254,15 @@
                 month: 'Mes',
                 week: 'Semana'
             },
+            dateClick: function(info) {
+                openEventModal(info.dateStr);
+            },
             eventClick: function(info) {
-                // Show event details in a nice alert
-                const eventType = info.event.extendedProps.event_type || 'evento';
+                const event = info.event;
+                const id = event.id;
+                const isTask = event.extendedProps.is_task;
+                const eventType = event.extendedProps.event_type || 'evento';
+                
                 const eventTypeEmoji = {
                     'examen': '📝',
                     'entrega': '📤',
@@ -201,23 +270,36 @@
                     'otro': '📌'
                 };
                 const emoji = eventTypeEmoji[eventType] || '📌';
-                const subject = info.event.extendedProps.subject || 'Sin materia';
-                const description = info.event.extendedProps.description || 'Sin descripción';
                 
-                alert(
-                    `${emoji} ${info.event.title}\n\n` +
-                    `📅 ${info.event.start.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}\n` +
-                    `⏰ ${info.event.start.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}\n\n` +
-                    `📚 Materia: ${subject}\n` +
-                    `📋 Tipo: ${eventType.charAt(0).toUpperCase() + eventType.slice(1)}\n` +
-                    `📝 Descripción: ${description}`
-                );
+                document.getElementById('detailEventEmoji').innerText = emoji;
+                document.getElementById('detailEventTitle').innerText = event.title;
+                document.getElementById('detailEventDate').innerText = event.start.toLocaleDateString('es-ES', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                document.getElementById('detailEventSubject').innerText = event.extendedProps.subject || 'Sin materia';
+                document.getElementById('detailEventType').innerText = eventType.charAt(0).toUpperCase() + eventType.slice(1);
+                document.getElementById('detailEventDescription').innerText = event.extendedProps.description || 'Sin descripción';
+                
+                const deleteForm = document.getElementById('deleteEventForm');
+                if (isTask) {
+                    deleteForm.classList.add('hidden');
+                } else {
+                    deleteForm.classList.remove('hidden');
+                    deleteForm.action = `/study/events/delete/${id}`;
+                }
+                
+                openDetailsModal();
             },
-            eventColor: '#f43f5e', // Default color
-            eventBackgroundColor: '#f43f5e',
-            eventBorderColor: '#e11d48',
             eventTextColor: '#ffffff',
-            eventClassNames: ['font-bold', 'rounded-lg', 'px-1'],
+            eventClassNames: function(arg) {
+                const etype = arg.event.extendedProps.event_type || 'otro';
+                return ['font-bold', 'rounded-lg', 'px-1.5', 'py-0.5', 'text-white', 'fc-event-' + etype];
+            },
             dayMaxEvents: true,
             weekends: true,
             nowIndicator: true,
@@ -231,13 +313,22 @@
             }
         });
         calendar.render();
-    });
+    }
 
-    function openEventModal() {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initCalendar);
+    } else {
+        initCalendar();
+    }
+
+    function openEventModal(dateStr) {
         const modal = document.getElementById('eventModal');
         modal.classList.remove('hidden');
         modal.classList.add('flex');
         document.body.style.overflow = 'hidden';
+        if (dateStr) {
+            document.querySelector('input[name="start_date"]').value = `${dateStr}T09:00`;
+        }
     }
 
     function closeEventModal() {
@@ -247,27 +338,54 @@
         document.body.style.overflow = 'auto';
     }
 
-    // Close modal on backdrop click
+    function openDetailsModal() {
+        const modal = document.getElementById('eventDetailsModal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeDetailsModal() {
+        const modal = document.getElementById('eventDetailsModal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = 'auto';
+    }
+
+    // Close modals on backdrop click
     document.getElementById('eventModal').addEventListener('click', function(e) {
         if (e.target === this) closeEventModal();
     });
+    document.getElementById('eventDetailsModal').addEventListener('click', function(e) {
+        if (e.target === this) closeDetailsModal();
+    });
 
-    // Close modal on ESC
+    // Close modals on ESC
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') closeEventModal();
+        if (e.key === 'Escape') {
+            closeEventModal();
+            closeDetailsModal();
+        }
     });
 </script>
 
 <style>
-    /* FullCalendar Custom Theme */
+    /* FullCalendar Custom Theme - Adaptive Colors */
     .fc-theme-standard .fc-scrollgrid {
-        border: 1px solid #1f2937 !important;
+        border: 1px solid #e5e7eb !important;
         border-radius: 12px;
         overflow: hidden;
+    }
+    .dark .fc-theme-standard .fc-scrollgrid {
+        border: 1px solid #1f2937 !important;
     }
     
     .fc-theme-standard td, 
     .fc-theme-standard th {
+        border-color: #e5e7eb !important;
+    }
+    .dark .fc-theme-standard td, 
+    .dark .fc-theme-standard th {
         border-color: #1f2937 !important;
     }
     
@@ -276,6 +394,9 @@
     }
     
     .fc-day-today {
+        background: rgba(244, 63, 94, 0.05) !important;
+    }
+    .dark .fc-day-today {
         background: rgba(244, 63, 94, 0.08) !important;
     }
     
@@ -292,33 +413,50 @@
     }
     
     .fc .fc-daygrid-day-number {
-        color: #9ca3af !important;
+        color: #4b5563 !important;
         font-weight: 500;
         font-size: 14px;
         padding: 6px 4px;
     }
+    .dark .fc .fc-daygrid-day-number {
+        color: #9ca3af !important;
+    }
     
     .fc .fc-col-header-cell-cushion {
-        color: #6b7280 !important;
+        color: #374151 !important;
         font-weight: 600;
         text-transform: uppercase;
         font-size: 12px;
         letter-spacing: 0.05em;
         padding: 10px 4px;
     }
+    .dark .fc .fc-col-header-cell-cushion {
+        color: #6b7280 !important;
+    }
     
     .fc .fc-daygrid-day-frame {
-        background: rgba(17, 24, 39, 0.5);
+        background: rgba(255, 255, 255, 0.4);
         transition: background 0.2s ease;
         min-height: 80px;
     }
+    .dark .fc .fc-daygrid-day-frame {
+        background: rgba(17, 24, 39, 0.5);
+    }
     
     .fc .fc-daygrid-day-frame:hover {
+        background: rgba(243, 244, 246, 0.7);
+    }
+    .dark .fc .fc-daygrid-day-frame:hover {
         background: rgba(31, 41, 55, 0.5);
     }
     
     .fc .fc-daygrid-day-events {
         padding: 2px 4px;
+    }
+    
+    .fc-event,
+    .fc-event * {
+        color: white !important;
     }
     
     .fc .fc-daygrid-event {
@@ -334,7 +472,10 @@
     
     .fc .fc-daygrid-event:hover {
         transform: scale(1.02);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    .dark .fc .fc-daygrid-event:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
     }
     
     /* Event colors by type */
@@ -360,15 +501,18 @@
     
     /* Toolbar */
     .fc .fc-toolbar-title {
-        color: white !important;
+        color: #111827 !important;
         font-size: 20px !important;
         font-weight: 700 !important;
     }
+    .dark .fc .fc-toolbar-title {
+        color: white !important;
+    }
     
     .fc .fc-button {
-        background: rgba(31, 41, 55, 0.8) !important;
-        border: 1px solid #374151 !important;
-        color: #d1d5db !important;
+        background: white !important;
+        border: 1px solid #d1d5db !important;
+        color: #374151 !important;
         border-radius: 10px !important;
         padding: 8px 14px !important;
         font-weight: 600 !important;
@@ -376,12 +520,22 @@
         transition: all 0.2s ease !important;
         text-transform: capitalize;
     }
+    .dark .fc .fc-button {
+        background: rgba(31, 41, 55, 0.8) !important;
+        border: 1px solid #374151 !important;
+        color: #d1d5db !important;
+    }
     
     .fc .fc-button:hover {
+        background: #f3f4f6 !important;
+        border-color: #c0c4cc !important;
+        color: #111827 !important;
+        transform: translateY(-1px);
+    }
+    .dark .fc .fc-button:hover {
         background: rgba(55, 65, 81, 0.8) !important;
         border-color: #4b5563 !important;
         color: white !important;
-        transform: translateY(-1px);
     }
     
     .fc .fc-button-primary:not(:disabled):active,
@@ -389,18 +543,28 @@
         background: #f43f5e !important;
         border-color: #f43f5e !important;
         color: white !important;
-        box-shadow: 0 4px 12px rgba(244, 63, 94, 0.3);
+        box-shadow: 0 4px 12px rgba(244, 63, 94, 0.2);
+    }
+    .dark .fc .fc-button-primary:not(:disabled):active,
+    .dark .fc .fc-button-primary:not(:disabled).fc-button-active {
+        box-shadow: 0 4px 12px rgba(244, 63, 94, 0.4);
     }
     
     .fc .fc-button-primary:focus {
-        box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.3) !important;
+        box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.2) !important;
+    }
+    .dark .fc .fc-button-primary:focus {
+        box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.4) !important;
     }
     
     /* More link */
     .fc .fc-daygrid-more-link {
-        color: #9ca3af !important;
+        color: #4b5563 !important;
         font-weight: 500;
         font-size: 11px;
+    }
+    .dark .fc .fc-daygrid-more-link {
+        color: #9ca3af !important;
     }
     
     .fc .fc-daygrid-more-link:hover {
@@ -409,15 +573,21 @@
     
     /* Today button */
     .fc .fc-today-button {
-        background: rgba(244, 63, 94, 0.15) !important;
+        background: rgba(244, 63, 94, 0.1) !important;
         border-color: #f43f5e !important;
         color: #f43f5e !important;
     }
+    .dark .fc .fc-today-button {
+        background: rgba(244, 63, 94, 0.15) !important;
+    }
     
     .fc .fc-today-button:hover {
-        background: rgba(244, 63, 94, 0.25) !important;
+        background: rgba(244, 63, 94, 0.2) !important;
         border-color: #f43f5e !important;
         color: #f43f5e !important;
+    }
+    .dark .fc .fc-today-button:hover {
+        background: rgba(244, 63, 94, 0.25) !important;
     }
     
     /* Now indicator */
