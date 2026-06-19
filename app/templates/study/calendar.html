@@ -240,11 +240,16 @@
         var calendarEl = document.getElementById('calendar');
         if (!calendarEl) return;
         
+        const isMobile = window.innerWidth < 768;
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
             locale: 'es',
             events: '/study/api/events',
-            headerToolbar: {
+            headerToolbar: isMobile ? {
+                left: 'prev,next',
+                center: 'title',
+                right: 'today'
+            } : {
                 left: 'prev,next today',
                 center: 'title',
                 right: 'dayGridMonth,timeGridWeek'
@@ -253,6 +258,18 @@
                 today: 'Hoy',
                 month: 'Mes',
                 week: 'Semana'
+            },
+            windowResize: function(view) {
+                const isMobileNow = window.innerWidth < 768;
+                calendar.setOption('headerToolbar', isMobileNow ? {
+                    left: 'prev,next',
+                    center: 'title',
+                    right: 'today'
+                } : {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek'
+                });
             },
             dateClick: function(info) {
                 openEventModal(info.dateStr);
