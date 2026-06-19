@@ -229,6 +229,17 @@
     } else {
         initAnalytics();
     }
+
+    // Adapt chart colors dynamically on theme change
+    function handleThemeChange() {
+        const payloadEl = document.getElementById('analytics-payload');
+        if (!payloadEl) {
+            window.removeEventListener('theme-changed', handleThemeChange);
+            return;
+        }
+        initAnalytics();
+    }
+    window.addEventListener('theme-changed', handleThemeChange);
 })();
 </script>
 {% endblock %}
