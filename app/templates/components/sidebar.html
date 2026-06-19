@@ -1,7 +1,7 @@
 <!-- Mobile backdrop for sidebar -->
 <div id="sidebar-backdrop" class="fixed inset-0 bg-gray-950/40 backdrop-blur-sm z-40 hidden transition-opacity duration-300 lg:hidden"></div>
 
-<aside id="main-sidebar" class="fixed inset-y-0 left-0 z-50 w-72 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-white/5 flex flex-col h-full transform -translate-x-full lg:translate-x-0 lg:static lg:inset-auto lg:flex transition-transform duration-300 ease-in-out">
+<aside id="main-sidebar" class="fixed inset-y-0 left-0 z-50 w-72 bg-white dark:bg-dark-900 border-r border-gray-200 dark:border-white/5 flex flex-col h-full transform -translate-x-full lg:translate-x-0 lg:static lg:inset-auto lg:flex transition-transform duration-300 ease-in-out">
     <!-- Header/Logo -->
     <div class="p-8">
         <a href="{{ url_for('main.inicio') }}" class="flex items-center gap-4 group">
@@ -102,7 +102,7 @@
                 <span id="theme-toggle-dark-icon" class="hidden">🌙 Oscuro</span>
                 <span id="theme-toggle-light-icon" class="hidden">☀️ Claro</span>
             </span>
-            <div class="w-8 h-4 bg-gray-300 dark:bg-gray-700 rounded-full relative transition-colors group-hover:bg-indigo-600">
+            <div class="w-8 h-4 bg-gray-300 dark:bg-dark-700 rounded-full relative transition-colors group-hover:bg-indigo-600">
                 <div id="theme-toggle-dot" class="absolute top-1 left-1 w-2 h-2 bg-white rounded-full transition-all"></div>
             </div>
         </button>

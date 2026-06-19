@@ -2,7 +2,7 @@
 <div id="modalOverlay" class="fixed inset-0 bg-gray-950/90 backdrop-blur-md z-[100] hidden items-center justify-center p-4">
     
     <!-- Modal de Login -->
-    <div id="loginModal" class="w-full max-w-lg bg-white dark:bg-gray-900 rounded-3xl shadow-2xl border border-gray-200 dark:border-white/10 overflow-hidden hidden animate-in zoom-in-95 duration-200">
+    <div id="loginModal" class="w-full max-w-lg bg-white dark:bg-dark-900 rounded-3xl shadow-2xl border border-gray-200 dark:border-white/10 overflow-hidden hidden animate-in zoom-in-95 duration-200">
         <div class="p-8 md:p-10">
             <div class="flex justify-between items-start mb-8">
                 <div>
@@ -18,7 +18,7 @@
 
             {% include 'components/forms/login_form.html' %}
 
-            <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-800 text-center">
+            <div class="mt-8 pt-6 border-t border-gray-200 dark:border-dark-800 text-center">
                 <p class="text-sm text-gray-500 dark:text-gray-400">¿No tienes cuenta? 
                     <button onclick="switchModal('register')" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-bold transition-colors">Regístrate gratis</button>
                 </p>
@@ -27,7 +27,7 @@
     </div>
 
     <!-- Modal de Registro -->
-    <div id="registerModal" class="w-full max-w-lg bg-white dark:bg-gray-900 rounded-3xl shadow-2xl border border-gray-200 dark:border-white/10 overflow-hidden hidden animate-in zoom-in-95 duration-200">
+    <div id="registerModal" class="w-full max-w-lg bg-white dark:bg-dark-900 rounded-3xl shadow-2xl border border-gray-200 dark:border-white/10 overflow-hidden hidden animate-in zoom-in-95 duration-200">
         <div class="p-8 md:p-10">
             <div class="flex justify-between items-start mb-8">
                 <div>
@@ -43,7 +43,7 @@
 
             {% include 'components/forms/register_form.html' %}
 
-            <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-800 text-center text-sm text-gray-500 dark:text-gray-400">
+            <div class="mt-8 pt-6 border-t border-gray-200 dark:border-dark-800 text-center text-sm text-gray-500 dark:text-gray-400">
                 ¿Ya tienes cuenta? 
                 <button onclick="switchModal('login')" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-bold transition-colors">Inicia sesión aquí</button>
             </div>
@@ -51,7 +51,7 @@
     </div>
 
     <!-- Modal de Términos y Condiciones -->
-    <div id="termsModal" class="w-full max-w-2xl bg-white dark:bg-gray-900 rounded-3xl shadow-2xl border border-gray-200 dark:border-white/10 overflow-hidden hidden animate-in zoom-in-95 duration-200 max-h-[80vh] flex flex-col">
+    <div id="termsModal" class="w-full max-w-2xl bg-white dark:bg-dark-900 rounded-3xl shadow-2xl border border-gray-200 dark:border-white/10 overflow-hidden hidden animate-in zoom-in-95 duration-200 max-h-[80vh] flex flex-col">
         <div class="p-8 md:p-10 flex flex-col h-full overflow-hidden">
             <div class="flex justify-between items-start mb-6">
                 <div>
@@ -84,7 +84,7 @@
                 <p>Nos reservamos el derecho de modificar, suspender o discontinuar cualquier parte del servicio en cualquier momento, con el fin de introducir mejoras de rendimiento o nuevas herramientas.</p>
             </div>
             
-            <div class="mt-6 pt-4 border-t border-gray-100 dark:border-gray-800 flex justify-end">
+            <div class="mt-6 pt-4 border-t border-gray-100 dark:border-dark-800 flex justify-end">
                 <button onclick="closeModals()" class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold rounded-xl transition-all shadow-lg shadow-indigo-500/20">
                     Aceptar
                 </button>

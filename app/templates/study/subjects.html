@@ -37,21 +37,21 @@
 
     <!-- Stats -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-        <div class="bg-white dark:bg-gray-900/50 border border-gray-200 dark:border-gray-800/50 rounded-2xl p-4 text-center hover:border-indigo-500/30 transition-all duration-300 shadow-sm dark:shadow-none">
+        <div class="bg-white dark:bg-dark-900/50 border border-gray-200 dark:border-dark-800/50 rounded-2xl p-4 text-center hover:border-indigo-500/30 transition-all duration-300 shadow-sm dark:shadow-none">
             <div class="text-2xl font-bold text-gray-900 dark:text-white">{{ subjects|length }}</div>
             <div class="text-xs text-gray-500 font-medium uppercase tracking-wider">Total Materias</div>
         </div>
-        <div class="bg-white dark:bg-gray-900/50 border border-gray-200 dark:border-gray-800/50 rounded-2xl p-4 text-center hover:border-purple-500/30 transition-all duration-300 shadow-sm dark:shadow-none">
+        <div class="bg-white dark:bg-dark-900/50 border border-gray-200 dark:border-dark-800/50 rounded-2xl p-4 text-center hover:border-purple-500/30 transition-all duration-300 shadow-sm dark:shadow-none">
             {% set total_topics = 0 %}
             {% for s in subjects %}{% set total_topics = total_topics + s.topics|length %}{% endfor %}
             <div class="text-2xl font-bold text-gray-900 dark:text-white">{{ total_topics }}</div>
             <div class="text-xs text-gray-500 font-medium uppercase tracking-wider">Total Temas</div>
         </div>
-        <div class="bg-white dark:bg-gray-900/50 border border-gray-200 dark:border-gray-800/50 rounded-2xl p-4 text-center hover:border-emerald-500/30 transition-all duration-300 shadow-sm dark:shadow-none">
+        <div class="bg-white dark:bg-dark-900/50 border border-gray-200 dark:border-dark-800/50 rounded-2xl p-4 text-center hover:border-emerald-500/30 transition-all duration-300 shadow-sm dark:shadow-none">
             <div class="text-2xl font-bold text-emerald-600 dark:text-emerald-400">0</div>
             <div class="text-xs text-gray-500 font-medium uppercase tracking-wider">Completados</div>
         </div>
-        <div class="bg-white dark:bg-gray-900/50 border border-gray-200 dark:border-gray-800/50 rounded-2xl p-4 text-center hover:border-amber-500/30 transition-all duration-300 shadow-sm dark:shadow-none">
+        <div class="bg-white dark:bg-dark-900/50 border border-gray-200 dark:border-dark-800/50 rounded-2xl p-4 text-center hover:border-amber-500/30 transition-all duration-300 shadow-sm dark:shadow-none">
             <div class="text-2xl font-bold text-amber-600 dark:text-amber-400">0</div>
             <div class="text-xs text-gray-500 font-medium uppercase tracking-wider">Pendientes</div>
         </div>
@@ -59,7 +59,7 @@
 
     {% if not subjects %}
     <!-- Empty State -->
-    <div class="bg-white dark:bg-gray-900/50 border-2 border-dashed border-gray-200 dark:border-gray-800 rounded-3xl p-16 text-center relative overflow-hidden shadow-sm dark:shadow-none">
+    <div class="bg-white dark:bg-dark-900/50 border-2 border-dashed border-gray-200 dark:border-dark-800 rounded-3xl p-16 text-center relative overflow-hidden shadow-sm dark:shadow-none">
         <div class="absolute inset-0 bg-gradient-to-br from-indigo-600/5 to-purple-600/5"></div>
         <div class="relative z-10">
             <div class="w-20 h-20 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
@@ -78,7 +78,7 @@
     <!-- Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {% for subject in subjects %}
-        <div class="group relative bg-white dark:bg-gradient-to-br dark:from-gray-900 dark:to-gray-800/50 border border-gray-200 dark:border-gray-800/50 rounded-3xl p-6 hover:border-indigo-500/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-indigo-500/10 overflow-hidden shadow-sm dark:shadow-none">
+        <div class="group relative bg-white dark:bg-gradient-to-br dark:from-dark-900 dark:to-dark-800/50 border border-gray-200 dark:border-dark-800/50 rounded-3xl p-6 hover:border-indigo-500/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-indigo-500/10 overflow-hidden shadow-sm dark:shadow-none">
             <!-- Background gradient on hover -->
             <div class="absolute inset-0 bg-gradient-to-br from-indigo-600/0 to-purple-600/0 group-hover:from-indigo-600/5 group-hover:to-purple-600/5 transition-all duration-500"></div>
             
@@ -90,7 +90,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                         </svg>
                     </div>
-                    <span class="inline-block px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-[10px] font-bold uppercase tracking-widest rounded-full border border-gray-200 dark:border-gray-700">
+                    <span class="inline-block px-3 py-1 bg-gray-100 dark:bg-dark-800 text-gray-500 dark:text-gray-400 text-[10px] font-bold uppercase tracking-widest rounded-full border border-gray-200 dark:border-dark-700">
                         {{ subject.category or 'General' }}
                     </span>
                 </div>
@@ -125,7 +125,7 @@
                 </p>
                 
                 <!-- Card Footer -->
-                <div class="flex items-center justify-between pt-5 border-t border-gray-200 dark:border-gray-800/50">
+                <div class="flex items-center justify-between pt-5 border-t border-gray-200 dark:border-dark-800/50">
                     <div class="flex items-center gap-2">
                         <svg class="w-4 h-4 text-gray-400 dark:text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -146,7 +146,7 @@
 
 <!-- Modal -->
 <div id="subjectModal" class="fixed inset-0 bg-gray-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
-    <div class="w-full max-w-lg bg-white dark:bg-gradient-to-br dark:from-gray-900 dark:to-gray-800 rounded-3xl shadow-2xl border border-gray-200 dark:border-white/10 overflow-hidden animate-in zoom-in-95 duration-200 text-gray-900 dark:text-white">
+    <div class="w-full max-w-lg bg-white dark:bg-gradient-to-br dark:from-dark-900 dark:to-dark-800 rounded-3xl shadow-2xl border border-gray-200 dark:border-white/10 overflow-hidden animate-in zoom-in-95 duration-200 text-gray-900 dark:text-white">
         <div class="p-8 md:p-10">
             <div class="flex justify-between items-start mb-8">
                 <div>
@@ -166,19 +166,19 @@
                         Nombre de la Materia <span class="text-red-500">*</span>
                     </label>
                     <input type="text" name="name" id="subjName" required placeholder="ej: Programación Web"
-                        class="w-full px-5 py-4 bg-gray-50/50 dark:bg-gray-950/50 border-2 border-gray-200 dark:border-gray-700/50 rounded-2xl text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 transition-all duration-300">
+                        class="w-full px-5 py-4 bg-gray-50/50 dark:bg-dark-950/50 border-2 border-gray-200 dark:border-dark-700/50 rounded-2xl text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 transition-all duration-300">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Categoría</label>
                     <input type="text" name="category" id="subjCategory" placeholder="ej: Programación, Matemáticas..."
-                        class="w-full px-5 py-4 bg-gray-50/50 dark:bg-gray-950/50 border-2 border-gray-200 dark:border-gray-700/50 rounded-2xl text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 transition-all duration-300">
+                        class="w-full px-5 py-4 bg-gray-50/50 dark:bg-dark-950/50 border-2 border-gray-200 dark:border-dark-700/50 rounded-2xl text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 transition-all duration-300">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Descripción <span class="text-gray-400 dark:text-gray-500 text-xs">(Opcional)</span></label>
                     <textarea name="description" id="subjDescription" rows="3" placeholder="¿De qué trata esta materia?"
-                        class="w-full px-5 py-4 bg-gray-50/50 dark:bg-gray-950/50 border-2 border-gray-200 dark:border-gray-700/50 rounded-2xl text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 transition-all duration-300 resize-none"></textarea>
+                        class="w-full px-5 py-4 bg-gray-50/50 dark:bg-dark-950/50 border-2 border-gray-200 dark:border-dark-700/50 rounded-2xl text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 transition-all duration-300 resize-none"></textarea>
                 </div>
 
                 <button type="submit" 
