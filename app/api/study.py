@@ -348,11 +348,11 @@ def view_analytics():
     progress_percent = round((completed_topics / total_topics * 100), 1) if total_topics > 0 else 0
     
     sessions_by_subject = db.session.query(Subject.name, func.sum(StudySession.duration))\
-        .join(StudySession).filter(StudySession.user_id == current_user.id)\
+        .join(StudySession).filter(StudySession.user_id == current_user.id, StudySession.end_time.is_not(None))\
         .group_by(Subject.name).all()
     
     chart_labels = [s[0] for s in sessions_by_subject]
-    chart_data = [round(s[1]/60, 1) for s in sessions_by_subject]
+    chart_data = [round((s[1] or 0)/60, 1) for s in sessions_by_subject]
 
     weekly_hours = [0] * 7
     today = datetime.utcnow().date()
