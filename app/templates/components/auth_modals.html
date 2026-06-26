@@ -32,7 +32,7 @@
             <div class="flex justify-between items-start mb-8">
                 <div>
                     <h2 class="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">Crea tu cuenta 🚀</h2>
-                    <p class="text-gray-500 dark:text-gray-400 mt-2 text-sm">Únete a Estudios.io hoy mismo</p>
+                    <p class="text-gray-500 dark:text-gray-400 mt-2 text-sm">Únete a Estudy.io hoy mismo</p>
                 </div>
                 <button onclick="closeModals()" class="text-gray-400 hover:text-gray-600 dark:hover:text-white transition-colors bg-gray-100 dark:bg-white/5 p-2 rounded-xl">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -66,10 +66,10 @@
             </div>
             
             <div class="flex-grow overflow-y-auto space-y-4 pr-2 text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-                <p>Bienvenido a <strong>Estudios.io</strong>. Al utilizar nuestra plataforma, aceptas cumplir con los siguientes términos y condiciones. Por favor, léelos detenidamente antes de comenzar a usar nuestros servicios.</p>
+                <p>Bienvenido a <strong>Estudy.io</strong>. Al utilizar nuestra plataforma, aceptas cumplir con los siguientes términos y condiciones. Por favor, léelos detenidamente antes de comenzar a usar nuestros servicios.</p>
                 
                 <h3 class="font-bold text-gray-900 dark:text-white text-base mt-4">1. Uso del Servicio</h3>
-                <p>Estudios.io proporciona herramientas de organización de materias, planificación y seguimiento del rendimiento escolar. Te comprometes a utilizar la plataforma únicamente con fines educativos y de carácter personal.</p>
+                <p>Estudy.io proporciona herramientas de organización de materias, planificación y seguimiento del rendimiento escolar. Te comprometes a utilizar la plataforma únicamente con fines educativos y de carácter personal.</p>
                 
                 <h3 class="font-bold text-gray-900 dark:text-white text-base mt-4">2. Registro y Seguridad de la Cuenta</h3>
                 <p>Para utilizar ciertas funciones, debes crear una cuenta. Eres responsable de mantener la confidencialidad de tu contraseña y de todas las actividades que ocurran bajo tu cuenta.</p>
@@ -78,7 +78,7 @@
                 <p>Tu privacidad es sumamente importante para nosotros. Todos los datos académicos, notas, horarios y tareas se guardan de forma segura y solo son accesibles por ti como usuario de la cuenta.</p>
                 
                 <h3 class="font-bold text-gray-900 dark:text-white text-base mt-4">4. Propiedad Intelectual</h3>
-                <p>Todos los contenidos, diseños, logotipos e interfaz gráfica de Estudios.io son propiedad intelectual de la plataforma y están protegidos por leyes de derechos de autor.</p>
+                <p>Todos los contenidos, diseños, logotipos e interfaz gráfica de Estudy.io son propiedad intelectual de la plataforma y están protegidos por leyes de derechos de autor.</p>
                 
                 <h3 class="font-bold text-gray-900 dark:text-white text-base mt-4">5. Modificaciones del Servicio</h3>
                 <p>Nos reservamos el derecho de modificar, suspender o discontinuar cualquier parte del servicio en cualquier momento, con el fin de introducir mejoras de rendimiento o nuevas herramientas.</p>
@@ -94,6 +94,41 @@
 </div>
 
 <script>
+    function showTempAlert(message, category = 'error') {
+        const container = document.getElementById('flash-alerts-container') || (() => {
+            const div = document.createElement('div');
+            div.id = 'flash-alerts-container';
+            div.className = 'fixed top-24 left-1/2 -translate-x-1/2 z-[110] space-y-2 max-w-sm w-full px-4 flex flex-col items-center';
+            document.body.appendChild(div);
+            return div;
+        })();
+
+        const alert = document.createElement('div');
+        const bgBorderText = category === 'error' 
+            ? 'bg-red-500/10 border-red-500/50 text-red-400' 
+            : 'bg-emerald-500/10 border-emerald-500/50 text-emerald-400';
+        alert.className = `p-4 rounded-xl border flex items-start gap-3 shadow-2xl animate-in fade-in zoom-in-95 duration-300 w-full ${bgBorderText}`;
+        
+        alert.innerHTML = `
+            <div class="flex-grow text-center text-sm font-medium">
+                ${message}
+            </div>
+            <button class="text-current opacity-50 hover:opacity-100 transition-opacity">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 11-1.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+            </button>
+        `;
+
+        alert.querySelector('button').addEventListener('click', () => alert.remove());
+        container.appendChild(alert);
+
+        setTimeout(() => {
+            alert.classList.add('animate-out', 'fade-out', 'zoom-out-95', 'duration-300');
+            setTimeout(() => alert.remove(), 300);
+        }, 2000);
+    }
+
     function openModal(type) {
         document.getElementById('modalOverlay').classList.remove('hidden');
         document.getElementById('modalOverlay').classList.add('flex');
@@ -137,5 +172,95 @@
 
     document.getElementById('modalOverlay').addEventListener('click', function(e) {
         if (e.target === this) closeModals();
+    });
+
+    document.addEventListener('submit', async function(e) {
+        const form = e.target;
+        if (form.id === 'registerForm') {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const btn = form.querySelector('button[type="submit"]');
+            const btnText = btn.querySelector('span') || btn;
+            const originalText = btnText.innerHTML;
+
+            btnText.innerHTML = '<svg class="animate-spin h-5 w-5 text-white inline-block mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Cargando...';
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+
+                if (response.ok) {
+                    const contentType = response.headers.get('content-type');
+                    if (contentType && contentType.includes('application/json')) {
+                        const data = await response.json();
+                        if (data.success) {
+                            // Check if we are in the modal context
+                            const modalOverlay = document.getElementById('modalOverlay');
+                            if (modalOverlay && !modalOverlay.classList.contains('hidden') && typeof closeModals === 'function' && typeof openModal === 'function') {
+                                closeModals();
+                                openModal('login');
+                                showTempAlert(data.message || 'Cuenta creada con éxito. Ya puedes iniciar sesión.', 'success');
+                                form.reset();
+                                btnText.innerHTML = originalText;
+                                return;
+                            }
+                            // Fallback or standalone page: redirect to landing showing login modal
+                            window.location.href = '/?show_login=1';
+                        } else {
+                            showTempAlert(data.message || 'Error al registrarse');
+                            btnText.innerHTML = originalText;
+                        }
+                    } else {
+                        window.location.href = '/?show_login=1';
+                    }
+                } else {
+                    const errText = await response.text();
+                    showTempAlert(errText || 'Error al crear la cuenta');
+                    btnText.innerHTML = originalText;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showTempAlert('Error al conectar con el servidor');
+                btnText.innerHTML = originalText;
+            }
+        } else if (form.id === 'loginForm') {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const btnText = document.getElementById('loginBtnText') || form.querySelector('button[type="submit"]');
+            const originalText = btnText.innerHTML;
+
+            btnText.innerHTML = '<svg class="animate-spin h-5 w-5 text-white inline-block mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Cargando...';
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+
+                if (response.redirected) {
+                    window.location.href = response.url;
+                } else {
+                    const result = await response.text();
+                    if (response.ok && !result.includes('Usuario o contraseña incorrectos')) {
+                        window.location.reload();
+                    } else {
+                        showTempAlert('Usuario o contraseña incorrectos');
+                        btnText.innerHTML = originalText;
+                    }
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showTempAlert('Error al conectar con el servidor');
+                btnText.innerHTML = originalText;
+            }
+        }
     });
 </script>

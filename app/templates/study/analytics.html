@@ -1,6 +1,6 @@
 {% extends base_template %}
 
-{% block title %}Análisis Académico - Estudios.io{% endblock %}
+{% block title %}Análisis Académico - Estudy.io{% endblock %}
 
 {% block content %}
 <!-- Data Payload (The safest way to pass data) -->
@@ -57,7 +57,7 @@
         <!-- Streak -->
         <div class="bg-white dark:bg-dark-900 border border-gray-200 dark:border-dark-800 p-6 rounded-3xl hover:border-indigo-500/50 transition-colors shadow-sm dark:shadow-none">
             <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">Racha</p>
-            <h2 class="text-4xl font-black text-amber-500">{{ study_streak | default(0) }} 🔥</h2>
+            <h2 class="text-4xl font-black text-amber-500">{{ study_streak | default(0) }} </h2>
             <p class="text-xs text-gray-600 mt-2">Días seguidos</p>
         </div>
 

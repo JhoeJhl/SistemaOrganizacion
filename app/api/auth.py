@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
 from flask_login import login_user, logout_user, current_user, login_required
 from app.extensions import db, bcrypt
 from app.models.user import User, Role
@@ -40,11 +40,15 @@ def register():
         confirm_password = request.form.get('confirm_password')
 
         if password != confirm_password:
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return 'Las contraseñas no coinciden', 400
             flash('Las contraseñas no coinciden', 'error')
             return render_template('auth/register.html')
 
         existing_user = User.query.filter_by(username=username).first()
         if existing_user:
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return 'El nombre de usuario ya existe', 400
             flash('El nombre de usuario ya existe', 'error')
             return render_template('auth/register.html')
 
@@ -62,6 +66,12 @@ def register():
         db.session.commit()
 
         flash('Cuenta creada con éxito. Ya puedes iniciar sesión.', 'success')
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return jsonify({
+                'success': True,
+                'message': 'Cuenta creada con éxito. Ya puedes iniciar sesión.',
+                'redirect': url_for('auth.login')
+            })
         return redirect(url_for('auth.login'))
 
     return render_template('auth/register.html')

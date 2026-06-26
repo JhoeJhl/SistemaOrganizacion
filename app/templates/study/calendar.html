@@ -1,6 +1,6 @@
 {% extends base_template %}
 
-{% block title %}Calendario Académico - Estudios.io{% endblock %}
+{% block title %}Calendario Académico - Estudy.io{% endblock %}
 
 {% block content %}
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full relative">
@@ -56,7 +56,7 @@
     </div>
 
     <!-- Calendar Container -->
-    <div class="bg-white dark:bg-gradient-to-br dark:from-dark-900/80 dark:to-dark-800/80 border border-gray-200 dark:border-dark-800/50 rounded-3xl p-4 md:p-6 shadow-xl dark:shadow-2xl overflow-hidden">
+    <div class="bg-white dark:bg-dark-900 dark:bg-gradient-to-br dark:from-dark-900/80 dark:to-dark-800/80 border border-gray-200 dark:border-dark-800/50 rounded-3xl p-4 md:p-6 shadow-xl dark:shadow-2xl overflow-hidden">
         <div id="calendar"></div>
     </div>
 
@@ -436,7 +436,7 @@
         padding: 6px 4px;
     }
     .dark .fc .fc-daygrid-day-number {
-        color: #9ca3af !important;
+        color: #e5e7eb !important;
     }
     
     .fc .fc-col-header-cell-cushion {
@@ -448,7 +448,30 @@
         padding: 10px 4px;
     }
     .dark .fc .fc-col-header-cell-cushion {
-        color: #6b7280 !important;
+        color: #e5e7eb !important;
+    }
+    .dark .fc-col-header-cell {
+        background-color: #1f2937 !important;
+    }
+    .dark .fc-timegrid-slot-label-cushion,
+    .dark .fc-timegrid-axis-cushion,
+    .dark .fc-timegrid-slot-minor,
+    .dark .fc-timegrid-slot-label,
+    .dark .fc-timegrid-slot,
+    .dark .fc-list-event-title,
+    .dark .fc-list-event-time,
+    .dark .fc-list-day-text,
+    .dark .fc-list-day-side-text {
+        color: #e5e7eb !important;
+    }
+    .dark .fc-theme-standard .fc-list {
+        border-color: #1f2937 !important;
+    }
+    .dark .fc-list-day-cushion {
+        background-color: #1f2937 !important;
+    }
+    .dark .fc-list-event:hover td {
+        background-color: #374151 !important;
     }
     
     .fc .fc-daygrid-day-frame {

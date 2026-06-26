@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Estudios.io{% endblock %}</title>
+    <title>{% block title %}Estudy.io{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -16,7 +16,11 @@
                             900: '#111827',
                             800: '#1f2937',
                             700: '#374151'
-                        }
+                        },
+                        'dark-950': '#030712',
+                        'dark-900': '#111827',
+                        'dark-800': '#1f2937',
+                        'dark-700': '#374151'
                     }
                 }
             }
@@ -25,7 +29,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script>
         // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        if (localStorage.getItem('color-theme') === 'dark') {
             document.documentElement.classList.add('dark');
         } else {
             document.documentElement.classList.remove('dark')
@@ -76,7 +80,7 @@
                         <div class="w-8 h-8 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center">
                             <span class="text-white font-black text-sm">E</span>
                         </div>
-                        <span class="text-lg font-black text-gray-900 dark:text-white tracking-tighter">Estudios<span class="text-indigo-500">.io</span></span>
+                        <span class="text-lg font-black text-gray-900 dark:text-white tracking-tighter">Estudy<span class="text-indigo-500">.io</span></span>
                     </a>
                 </div>
             </header>
